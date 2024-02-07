@@ -1,0 +1,43 @@
+<!-- <main>
+    <section class="openImage">
+        <div>
+            <img src="../../../../../assets/global-pictures/landingPagePicture2.png" alt="locations à Orléans">
+        </div>
+        <div class="div-nuage">
+            <img src="../../../../../assets/global-pictures/nuages.png" alt="nuages">
+        </div>
+
+    </section>
+</main> -->
+
+<main>
+    <section class="openImage">
+        <div id="landingPage">
+            <img src="../../../../../assets/global-pictures/landingPagePicture2.png" alt="locations à Orléans">
+        </div>
+        <div id="nuage">
+            <img src="../../../../../assets/global-pictures/nuages.png" alt="nuages">
+        </div>
+    </section>
+
+
+    <section class="description">
+        <h1>Location de type airbnb à Orléans</h1>
+        <p>Vous recherchez un appartement pour un ou plusieurs jours à Orléans,</p>
+        <p>vous trouverez ci dessous les logements que nous vous proposons !</p>
+    </section>
+
+    <section class="home-booking-gestion">
+        <app-booking-gestion></app-booking-gestion>
+    </section>
+
+
+    <section class="showAppartments">
+        <p *ngIf="!traveller.checkinDate || !traveller.checkoutDate || traveller.nbAdult === 0" >Utilisez la barre de recherche ci-dessus pour rechercher uniquement les logements disponibles.</p>
+    </section>
+</main>
+
+
+
+
+<section class="test"></section>
