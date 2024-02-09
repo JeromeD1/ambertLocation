@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Traveller } from '../../../../../models/Traveller.model';
 import { BookingDataService } from '../../../../../shared/booking-data.service';
-import { PhotosService } from '../../../../../shared/photos.service';
 import { Photo } from '../../../../../models/Photo.model';
+import { AppartmentsService } from '../../../../../shared/appartments.service';
+import { Appartment } from '../../../../../models/Appartment.model';
 
 @Component({
   selector: 'app-booking-gestion',
@@ -11,16 +12,15 @@ import { Photo } from '../../../../../models/Photo.model';
 })
 export class BookingGestionComponent implements OnInit{
 
-  constructor(private bookingDataService: BookingDataService, private photoService: PhotosService) {}
+  constructor(private bookingDataService: BookingDataService, private appartmentService: AppartmentsService) {}
 
   traveller!: Traveller;
-  allPhotos: Photo[] = []; 
+  appartments: Appartment[] = [];
 
   ngOnInit(): void {
      this.getTravellerData(); 
+     this.getAppartment();
     //  this.photoService.getAllAppartmentPhotos().subscribe((photos:Photo[]) => this.allPhotos = photos);
-    this.allPhotos = this.photoService.getAmbert1Photos();
-     console.log("allPhotos",this.allPhotos);
      
   }
 
@@ -30,6 +30,10 @@ export class BookingGestionComponent implements OnInit{
 
   updateTravellerData(event: Traveller) :void {
     this.bookingDataService.setTraveller(event);
+  }
+
+  getAppartment():void {
+    this.appartmentService.getAppartments().subscribe(appartments => this.appartments = appartments)
   }
 
 

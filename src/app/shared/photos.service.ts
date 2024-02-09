@@ -31,10 +31,10 @@ export class PhotosService {
       (photos: Photo[]) => {
         this._allAppartmentPhotos = photos;
         // this._allAppartmentPhotos.next(photos);
-        this._ambert1Photos = photos.filter(photo => photo.appartment === 'ambert1');
-        this._ambert4Photos = photos.filter(photo => photo.appartment === 'ambert4');
-        this._ambert5Photos = photos.filter(photo => photo.appartment === 'ambert5');
-        this._illiersPhotos = photos.filter(photo => photo.appartment === 'illiers');
+        this._ambert1Photos = photos.filter(photo => photo.appartment_id === 1);
+        this._ambert4Photos = photos.filter(photo => photo.appartment_id === 2);
+        this._ambert5Photos = photos.filter(photo => photo.appartment_id === 3);
+        this._illiersPhotos = photos.filter(photo => photo.appartment_id === 4);
         console.log("allphotos in service", photos);
         
       }

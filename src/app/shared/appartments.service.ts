@@ -1,40 +1,93 @@
+// import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+// import { Observable } from 'rxjs';
+
+// import { environment } from '../../environment/environment';
+
+// import { Appartment } from '../models/Appartment.model';
+
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class AppartmentsService {
+
+//   constructor(private http: HttpClient) { 
+//   }
+
+ 
+
+//   getAppartments():Observable<Appartment[]> {
+//     return this.http.get<Appartment[]>(environment.BACKEND_BASE_URL + '/appartments')
+
+//   }
+
+
+// }
+
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+
+import { environment } from '../../environment/environment';
+
 import { Appartment } from '../models/Appartment.model';
-import { Photo } from '../models/Photo.model';
-import { ReservationDate } from '../models/ReservationDate.model';
-import { PhotosService } from './photos.service';
-import { map } from 'rxjs';
+import { Reservations } from '../models/Reservations.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppartmentsService {
 
-  constructor(private http: HttpClient, private photoService: PhotosService) { 
-    this.allPhotos = photoService.getAllAppartmentPhotos();
-    this.getAppartments();
+  constructor(private http: HttpClient) { 
   }
 
-  allPhotos: Photo[] = [];
-  appartments: Appartment[] = []
+ 
 
-  getAppartments():void {
-    this.http.get<Appartment[]>('../../assets/json/appartmentsDescription.json').pipe(
-      map((myAppartment: Appartment[]) => {
-        
-        const newAppartments = myAppartment.map(element => {
+  // getAppartments():Observable<Appartment[]> {
+  //   return this.http.get<Appartment[]>(environment.BACKEND_BASE_URL + '/appartments').pipe(
+  //     map((appartments) => appartments.map(appartment => {
+  //       const reservations = appartment.reservations.map(reservation => new Reservations(
+  //         reservation.id,
+  //         reservation.appartment_id,
+  //         new Date(reservation.checkinDate),
+  //         new Date(reservation.checkoutDate),
+  //         reservation.nbAdult,
+  //         reservation.nbChild,
+  //         reservation.nbBaby,
+  //         reservation.reservationPrice
+  //       ))
 
-          const photos: Photo[] = this.allPhotos.filter(photo => photo.appartment === element.name);
-          element.photos = photos;
-          element.reservations = [];
+  //       return {...appartment, reservations}
+  //     }))
+  //   )
 
-          return element;
-        })
+  // }
 
-        return newAppartments;
-      })
-    ).subscribe((appartments: Appartment[]) => this.appartments = appartments)
+  getAppartments():Observable<Appartment[]> {
+    return this.http.get<Appartment[]>(environment.BACKEND_BASE_URL + '/appartments').pipe(
+      map((appartments) => appartments.map(appartment => new Appartment(
+        appartment.id,
+        appartment.name,
+        appartment.description,
+        appartment.address,
+        appartment.zipCode,
+        appartment.city,
+        appartment.distanceCityCenter,
+        appartment.distanceTrain,
+        appartment.distanceTram,
+        appartment.nightPrice,
+        appartment.caution,
+        appartment.googleMapUrl,
+        appartment.infos,
+        appartment.photos,
+        appartment.reservations
+      ))
+    )
+    )
+
   }
 
 

@@ -1,0 +1,28 @@
+.main-booking-gestion {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .showAppartments {
+        margin-top: 32px;
+
+        p {
+            font-size: 1.2rem;
+            color: rgb(200, 0, 0);
+        }
+    }
+
+
+    .section-show-appartments-cards {
+        margin-top: 64px;
+        // border: 1px solid black;
+        max-width: 1600px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 96px;
+    }
+}

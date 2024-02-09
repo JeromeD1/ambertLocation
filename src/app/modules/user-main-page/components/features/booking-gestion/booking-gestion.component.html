@@ -1,5 +1,18 @@
-<app-travelling-choices [traveller]="traveller" (travellerChange)="updateTravellerData($event)" ></app-travelling-choices>
+<main class="main-booking-gestion">
 
-<!-- <img *ngFor="let photo of allPhotos" [src]="photo.imgUrl" alt="photo"> -->
+    <app-travelling-choices [traveller]="traveller" (travellerChange)="updateTravellerData($event)" ></app-travelling-choices>
+    
+    <!-- <img *ngFor="let photo of allPhotos" [src]="photo.imgUrl" alt="photo"> -->
+    
+    <!-- <button type="button" (click)="showTraveller()">Show traveller</button> -->
 
-<!-- <button type="button" (click)="showTraveller()">Show traveller</button> -->
+    <section class="showAppartments">
+        <p *ngIf="!traveller.checkinDate || !traveller.checkoutDate || traveller.nbAdult === 0" >Utilisez la barre de recherche ci-dessus pour rechercher uniquement les logements disponibles.</p>
+    </section>
+    
+    <section class="section-show-appartments-cards">
+        <div *ngFor="let appartment of appartments">
+            <app-appartment-card [appartment]="appartment" [traveller]="traveller" ></app-appartment-card>
+        </div>
+    </section>
+</main>

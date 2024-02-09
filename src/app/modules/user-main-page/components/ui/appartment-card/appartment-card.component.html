@@ -1,1 +1,40 @@
-<p>appartment-card works!</p>
+<main class="main-appartment-card">
+    <h1>{{appartment.description}} </h1>
+
+    <section class="caroussel" #caroussel>
+        <img [src]="appartment.photos[index].imgUrl" alt="photo" class="img-caroussel" #imgCaroussel>
+        <img src="../../../../../../assets/icons/icons8-flèche-gauche-rose.png" 
+        alt="précédant" 
+        class="fleche-caroussel fleche-gauche"
+        (click)="previousPhoto()"
+        *ngIf="index > 0">
+
+        <img src="../../../../../../assets/icons/icons8-flèche-droite-rose.png" 
+        alt="suivant" 
+        class="fleche-caroussel fleche-droite"
+        (click)="nextPhoto()"
+        *ngIf="index < appartment.photos.length -1">
+
+    </section>
+
+    <section class="infoResa-container">
+        <div class="div-info">
+            <p>{{appartment.distanceCityCenter}} </p>
+            <p>{{appartment.distanceTrain}} </p>
+            <p>{{appartment.distanceTram}} </p>
+            <p>{{getNightPrice()}} €/nuit ({{(traveller.nbAdult > 0) ? (traveller.nbAdult + traveller.nbChild) + " pers." : "2 pers."}}) </p>
+
+        </div>
+
+        <div class="div-resa">
+            <p *ngIf="getTravelPrice()" class="infoPrixSejour">{{getTravelPrice()}}€ pour la durée du séjour ({{getNumberOfDays()}} jours) </p>
+            <button type="button">Demande de réservation</button>
+
+        </div>
+    </section>
+
+    <section class="otherInfo-container">
+        <button type="button">+ de détails</button>
+        <button type="button">Toutes les dispos</button>
+    </section>
+</main>
