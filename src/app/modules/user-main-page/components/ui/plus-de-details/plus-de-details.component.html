@@ -1,0 +1,26 @@
+<main class="main-plusDeDetails">
+
+    <section class="moreDetails-container">
+        <img src="../../../../../../assets/icons/icon-close-window.png" (click)="closeMoreDetails()" alt="close" class="img-close">
+    
+        <div class="info-container">
+            <p *ngFor="let info of infos" >{{info.info}} </p>
+        </div>
+
+        <div class="localisation-container">
+            <div class="address">
+                <h1>Adresse :</h1>
+                <p>bla</p>
+                <p>bla</p>
+            </div>
+
+            <div class="googleMap">
+                <iframe [src]="googleMapUrl | safeUrl:'resourceurl' "  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+    
+    </section>
+
+
+</main>
