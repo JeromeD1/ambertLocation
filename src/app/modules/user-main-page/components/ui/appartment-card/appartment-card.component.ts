@@ -17,6 +17,14 @@ export class AppartmentCardComponent implements AfterViewInit {
 
   index: number = 0;
 
+  showMoreDetails:boolean = false;
+
+
+
+  changeShowMoreDetails() {
+    this.showMoreDetails = !this.showMoreDetails;
+  }
+
   nextPhoto():void {
     if(this.index < this.appartment.photos.length -1) {
       this.index++;
@@ -57,7 +65,7 @@ export class AppartmentCardComponent implements AfterViewInit {
 
   getNumberOfDays(): number | null {
     if(this.traveller.checkinDate && this.traveller.checkoutDate) {
-      return this.traveller.checkoutDate.getDate() - this.traveller.checkinDate.getDate();
+      return (this.traveller.checkoutDate.getTime() - this.traveller.checkinDate.getTime()) / (1000 * 3600 * 24); //(checkoutDate.getTime() - checkinDate.getTime()) / (1000 * 3600 * 24)
     } else {
       return null;
     }

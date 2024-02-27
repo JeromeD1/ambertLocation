@@ -14,6 +14,9 @@ import { BookingGestionComponent } from './components/features/booking-gestion/b
 import { TravellingChoicesComponent } from './components/ui/travelling-choices/travelling-choices.component';
 import { ChooseVoyagersComponent } from './components/ui/choose-voyagers/choose-voyagers.component';
 import { AppartmentCardComponent } from './components/ui/appartment-card/appartment-card.component';
+import { PlusDeDetailsComponent } from './components/ui/plus-de-details/plus-de-details.component';
+import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
+
 
 
 @NgModule({
@@ -23,7 +26,9 @@ import { AppartmentCardComponent } from './components/ui/appartment-card/appartm
     BookingGestionComponent,
     TravellingChoicesComponent,
     ChooseVoyagersComponent,
-    AppartmentCardComponent
+    AppartmentCardComponent,
+    PlusDeDetailsComponent,
+    SafeUrlPipe,
   ],
   imports: [
     CommonModule,
@@ -32,10 +37,12 @@ import { AppartmentCardComponent } from './components/ui/appartment-card/appartm
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    
   ],
   exports: [
-    UserMainPageComponent
+    UserMainPageComponent,
+    SafeUrlPipe
   ]
 })
 export class UserMainPageModule { }

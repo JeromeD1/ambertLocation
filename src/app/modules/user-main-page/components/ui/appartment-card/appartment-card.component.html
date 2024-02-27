@@ -23,7 +23,6 @@
             <p>{{appartment.distanceTrain}} </p>
             <p>{{appartment.distanceTram}} </p>
             <p>{{getNightPrice()}} €/nuit ({{(traveller.nbAdult > 0) ? (traveller.nbAdult + traveller.nbChild) + " pers." : "2 pers."}}) </p>
-
         </div>
 
         <div class="div-resa">
@@ -34,7 +33,13 @@
     </section>
 
     <section class="otherInfo-container">
-        <button type="button">+ de détails</button>
+        <button type="button" (click)="changeShowMoreDetails()" >+ de détails</button>
         <button type="button">Toutes les dispos</button>
     </section>
 </main>
+
+<app-plus-de-details *ngIf="showMoreDetails" 
+(showMoreDetails)="changeShowMoreDetails()" 
+[googleMapUrl]="appartment.googleMapUrl" 
+[infos]="appartment.infos" >
+</app-plus-de-details>

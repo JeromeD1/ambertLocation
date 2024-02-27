@@ -11,9 +11,11 @@ import { AppComponent } from './app.component';
 import { UserMainPageModule } from './modules/user-main-page/user-main-page.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     provideClientHydration(),
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
