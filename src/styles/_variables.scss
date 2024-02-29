@@ -1,7 +1,17 @@
 $h1FontSize:3rem;
+$h2FontSize:2rem;
+$gpFontSize:1.5rem;
+$ppFontSize: 1rem;
 $colorBrand: #FFC2BA;
 $colorDarkest: #4D5460;
 $colorDark: #8F8B90;
 $colorMid: #C1D6D6;
 $colorLight:#FAE7E1;
 $colorLightest: #FAFAFA;
+
+@media screen and (max-width: 1000px) {
+$h1FontSize:2.5rem;
+$h2FontSize:1.8rem;
+$gpFontSize:1.3rem;
+$ppFontSize: 1rem;
+}

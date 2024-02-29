@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 
 import { Info } from '../../../../../models/Info.model';
+import { Appartment } from '../../../../../models/Appartment.model';
 
 
 @Component({
@@ -21,6 +22,9 @@ googleMapUrlSafe!: SafeResourceUrl;
 
   @Input()
   infos! : Info[];
+
+  @Input()
+  appartment!: Appartment;
 
   @Output()
   showMoreDetails: EventEmitter<boolean> = new EventEmitter();

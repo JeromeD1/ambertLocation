@@ -34,7 +34,7 @@ export class Appartment {
         public name: string,
         public description: string,
         public address: string,
-        public zipCode: string,
+        public zipcode: string,
         public city: string,
         public distanceCityCenter: string,
         public distanceTrain: string,

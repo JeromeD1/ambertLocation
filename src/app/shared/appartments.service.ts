@@ -68,12 +68,20 @@ export class AppartmentsService {
 
   getAppartments():Observable<Appartment[]> {
     return this.http.get<Appartment[]>(environment.BACKEND_BASE_URL + '/appartments').pipe(
-      map((appartments) => appartments.map(appartment => new Appartment(
+      map((appartments) => appartments.map(appartment => {
+        
+        //conversion de checkinDate et checkoutDate de reservations qui arrivent en string en Date
+        const reservations = appartment.reservations.map(resa =>(
+          {...resa, checkinDate: new Date(resa.checkinDate), checkoutDate: new Date(resa.checkoutDate)}
+        ));
+
+        
+        return new Appartment(
         appartment.id,
         appartment.name,
         appartment.description,
         appartment.address,
-        appartment.zipCode,
+        appartment.zipcode,
         appartment.city,
         appartment.distanceCityCenter,
         appartment.distanceTrain,
@@ -83,8 +91,9 @@ export class AppartmentsService {
         appartment.googleMapUrl,
         appartment.infos,
         appartment.photos,
-        appartment.reservations
-      ))
+        reservations
+      )}
+      )
     )
     )
 

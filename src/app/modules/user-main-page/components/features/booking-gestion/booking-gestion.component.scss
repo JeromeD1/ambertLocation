@@ -8,8 +8,9 @@
         margin-top: 32px;
 
         p {
-            font-size: 1.2rem;
+            font-size: var(--ppFontSize);
             color: rgb(200, 0, 0);
+            text-align: center;
         }
     }
 

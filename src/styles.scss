@@ -7,17 +7,68 @@
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 
 
+:root {
+--h1FontSize:3rem;
+--h2FontSize:2rem;
+--gpFontSize:1.5rem;
+--mpFontSize:1.25rem;
+--ppFontSize: 1.1rem;
+}
+
 body {
     background-color: $colorLightest;
 
 
     p {
-        font-size: 1rem;
+        font-size: var(--ppFontSize);
     }
 
     button {
-        font-size: 1.2rem;
+        font-size: var(--mpFontSize);
     }
+
+    h1{
+        font-size: var(--h2FontSize);
+    }
+
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+@media screen and (max-width:1000px) {
+
+
+        :root {
+            --h1FontSize:2.55rem;
+            --h2FontSize:1.8rem;
+            --gpFontSize:1.4rem;
+            --mpFontSize:1.1rem;
+            --ppFontSize: 1rem;
+            }
+}
+
+@media screen and (max-width:800px) {
+    :root {
+        --h1FontSize:2.2rem;
+        --h2FontSize:1.6rem;
+        --gpFontSize:1.3rem;
+        --buttonFontSize:1rem;
+        --ppFontSize: 0.9rem;
+        }
+}
+
+@media screen and (max-width:600px) {
+    :root {
+        --h1FontSize:1.9rem;
+        --h2FontSize:1.4rem;
+        --gpFontSize:1.2rem;
+        --buttonFontSize:0.8rem;
+        --ppFontSize: 0.85rem;
+        }
+}

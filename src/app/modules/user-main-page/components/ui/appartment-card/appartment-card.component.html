@@ -34,12 +34,18 @@
 
     <section class="otherInfo-container">
         <button type="button" (click)="changeShowMoreDetails()" >+ de détails</button>
-        <button type="button">Toutes les dispos</button>
+        <button type="button" (click)="changeShowToutesDispo()">Toutes les dispos</button>
     </section>
 </main>
 
 <app-plus-de-details *ngIf="showMoreDetails" 
 (showMoreDetails)="changeShowMoreDetails()" 
 [googleMapUrl]="appartment.googleMapUrl" 
+[appartment]="appartment"
 [infos]="appartment.infos" >
 </app-plus-de-details>
+
+<app-toutes-les-dispo *ngIf="showToutesDispo"
+[appartment]="appartment"
+(showToutesDispo)="changeShowToutesDispo()"
+></app-toutes-les-dispo>

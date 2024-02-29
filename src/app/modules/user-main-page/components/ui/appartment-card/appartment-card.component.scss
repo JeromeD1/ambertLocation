@@ -13,6 +13,10 @@
     box-shadow: 1px 1px 0 2px $colorMid;
     padding: 16px;
 
+    h1 {
+        text-align: center;
+    }
+
 
     .caroussel {
         position: relative;
@@ -20,6 +24,7 @@
         // height: 400px;
         object-fit: contain;
         overflow: hidden;
+        // border: 1px solid red;
 
 
         .img-caroussel {
@@ -133,3 +138,42 @@
 }
 
 
+@media screen and (max-width:600px) {
+    .main-appartment-card {
+       
+    
+        .infoResa-container {
+            width: 90%;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            // border: 1px solid red;
+            gap: 16px;
+    
+           
+    
+            .div-resa {
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                // border: 1px solid blue;
+    
+                
+    
+                button {
+                    padding: 8px;
+                }
+            }
+    
+        }
+    
+        .otherInfo-container{
+            margin-top: 16px;
+        }
+    }
+}

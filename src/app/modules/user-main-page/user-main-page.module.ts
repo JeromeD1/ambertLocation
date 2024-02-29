@@ -16,6 +16,7 @@ import { ChooseVoyagersComponent } from './components/ui/choose-voyagers/choose-
 import { AppartmentCardComponent } from './components/ui/appartment-card/appartment-card.component';
 import { PlusDeDetailsComponent } from './components/ui/plus-de-details/plus-de-details.component';
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
+import { ToutesLesDispoComponent } from './components/ui/toutes-les-dispo/toutes-les-dispo.component';
 
 
 
@@ -29,6 +30,7 @@ import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
     AppartmentCardComponent,
     PlusDeDetailsComponent,
     SafeUrlPipe,
+    ToutesLesDispoComponent,
   ],
   imports: [
     CommonModule,

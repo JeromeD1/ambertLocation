@@ -18,11 +18,16 @@ export class AppartmentCardComponent implements AfterViewInit {
   index: number = 0;
 
   showMoreDetails:boolean = false;
+  showToutesDispo: boolean = false;
 
 
 
   changeShowMoreDetails() {
     this.showMoreDetails = !this.showMoreDetails;
+  }
+
+  changeShowToutesDispo() {
+    this.showToutesDispo = !this.showToutesDispo;
   }
 
   nextPhoto():void {
