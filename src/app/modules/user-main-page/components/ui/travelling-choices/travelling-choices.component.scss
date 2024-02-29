@@ -53,15 +53,50 @@ main {
                 font-size: var(--mpFontSize);
             }
 
+            .button-container {
+                position: relative;
+                width: 100%;
+                max-width: 250px;
+                // border: 1px solid red;
+
+                img {
+                    position: absolute;
+                    top: 12px;
+                    right: -31px;
+                    width: 31px;
+                    height: auto;
+    
+                    &:hover {
+                        cursor: pointer;
+                        filter: sepia();
+                    }
+                }
+            }
+
             .formFieldContainer {
                 height: 55px;
                 width: 100%;
                 margin: 0;
                 max-width: 250px;
+                position: relative;
+
                 mat-form-field {
                     width: 100%;
                     max-width: 250px;
                     font-size: var(--ppFontSize);
+                }
+
+                img {
+                    position: absolute;
+                    top: 12px;
+                    right: -31px;
+                    width: 31px;
+                    height: auto;
+
+                    &:hover {
+                        cursor: pointer;
+                        filter: sepia();
+                    }
                 }
             }
 

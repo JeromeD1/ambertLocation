@@ -67,7 +67,7 @@ travellerChange = new EventEmitter<Traveller>();
 // @ViewChild('checkinDate') checkinDate!: ElementRef;
 // @ViewChild('checkoutDate') checkoutDate!: ElementRef;
 
-
+imgBalai = '../../../../../../assets/icons/icons8-balayer-gris.png';
 showChooseVoyager: boolean = false;
 travellerNumbers: TravellerNumbers = {
   numberAdult: this.traveller.nbAdult,
@@ -132,8 +132,20 @@ set checkoutDateValue(date: Date) {
   
 }
 
+deleteCheckinDateValue() {
+  this._checkinDateValue = null;
+}
 
+deleteCheckoutDateValue() {
+  this._checkoutDateValue = null;
+}
 
+deleteTravellers() {
+  this.travellerNumbers.numberAdult = 0;
+  this.travellerNumbers.numberBaby = 0;
+  this.travellerNumbers.numberChild = 0;
+  this.textTravellerNumber = "Combien ?";
+}
 
 
 
@@ -141,7 +153,7 @@ onStartResearch():void {
 
   if(!this._checkinDateValue || !this._checkoutDateValue || this.travellerNumbers.numberAdult === 0) return;
 
-  console.log("checkinDate",this.checkinDateValue,"checkoutDate",this.checkoutDateValue);
+
 
   const newTraveller: Traveller = {...this.traveller, 
     checkinDate: this.checkinDateValue, 
@@ -151,7 +163,6 @@ onStartResearch():void {
     nbBaby: this.travellerNumbers.numberBaby
   };
 
-  console.log("newTraveller",newTraveller);
   
   this.travellerChange.emit(newTraveller);
   

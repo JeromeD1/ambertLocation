@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Appartment } from '../../../../../models/Appartment.model';
+import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-toutes-les-dispo',
@@ -28,13 +29,32 @@ export class ToutesLesDispoComponent  {
 
       for(let reservation of this.appartment.reservations) {
         
-        if(time >= reservation.checkinDate.getTime() && time <= reservation.checkoutDate.getTime()){
+        if(time >= reservation.checkinDate.getTime() && time < reservation.checkoutDate.getTime()){
           return false;
         }
       }
 
     return true;
   }
+
+
+ 
+
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+
+    if (view === 'month') {
+      const time = cellDate.getTime();
+
+      for(let reservation of this.appartment.reservations) {
+          if(time >= reservation.checkinDate.getTime() && time < reservation.checkoutDate.getTime()){
+              return 'highlight-date';
+          }
+      }
+  }
+
+    return "";
+}
+
 
 
   

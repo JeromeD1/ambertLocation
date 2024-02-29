@@ -5,9 +5,11 @@
 
 
         <mat-calendar *ngIf="appartment"
+        #releasedAtPicker
         class="calendar"
         [dateFilter]="filterBookedDates"
-        [selected]="selectedDate">
+        [selected]="selectedDate"
+        [dateClass]="dateClass">
         </mat-calendar>
 
         <!-- <mat-form-field class="example-full-width">
