@@ -1,6 +1,7 @@
 import { Component, Input, ElementRef, ViewChild, HostListener, AfterViewInit } from '@angular/core';
 import { Appartment } from '../../../../../models/Appartment.model';
 import { Traveller } from '../../../../../models/Traveller.model';
+import { SomeFunctionsService } from '../../../../../shared/some-functions.service';
 
 @Component({
   selector: 'app-appartment-card',
@@ -9,8 +10,13 @@ import { Traveller } from '../../../../../models/Traveller.model';
 })
 export class AppartmentCardComponent implements AfterViewInit {
 
+  constructor(private someFunctionService: SomeFunctionsService){}
+
   @Input()
   appartment!: Appartment;
+
+  @Input()
+  appartments!:Appartment[];
 
   @Input()
   traveller!: Traveller
@@ -19,7 +25,16 @@ export class AppartmentCardComponent implements AfterViewInit {
 
   showMoreDetails:boolean = false;
   showToutesDispo: boolean = false;
-
+  showDemandeResa: boolean = false;
+  get travelPrice(): number | null {
+    return this.someFunctionService.getTravelPrice(this.traveller,this.appartment);
+  };
+  get nightPrice():number {
+    return this.someFunctionService.getNightPrice(this.traveller, this.appartment);
+  }
+  get numberOfDays(): number | null{
+    return this.someFunctionService.getNumberOfDays(this.traveller);
+  }
 
 
   changeShowMoreDetails() {
@@ -28,6 +43,10 @@ export class AppartmentCardComponent implements AfterViewInit {
 
   changeShowToutesDispo() {
     this.showToutesDispo = !this.showToutesDispo;
+  }
+
+  changeShowDemandeResa() {
+    this.showDemandeResa = !this.showDemandeResa;
   }
 
   nextPhoto():void {
@@ -42,25 +61,25 @@ export class AppartmentCardComponent implements AfterViewInit {
     }
   }
 
-  getTravelPrice(): number | null {
-    if(this.traveller.checkinDate && this.traveller.checkoutDate && this.traveller.nbAdult > 0) {
+  // getTravelPrice(): number | null {
+  //   if(this.traveller.checkinDate && this.traveller.checkoutDate && this.traveller.nbAdult > 0) {
 
-      return this.appartment.calculateReservationPrice(
-        this.traveller.nbAdult,
-        this.traveller.nbChild, 
-        this.traveller.checkinDate,
-        this.traveller.checkoutDate,
-        1);
-    } else {
-      return null;
-    }
-  }
+  //     return this.appartment.calculateReservationPrice(
+  //       this.traveller.nbAdult,
+  //       this.traveller.nbChild, 
+  //       this.traveller.checkinDate,
+  //       this.traveller.checkoutDate,
+  //       1);
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   getNightPrice(): number {
 
     const numberOfTraveller = this.traveller.nbAdult + this.traveller.nbChild;
     if(this.traveller.nbAdult > 0 && numberOfTraveller > 2) {
-        const newNightPrice = this.appartment.nightPrice + 15 * (numberOfTraveller - 2);
+        const newNightPrice = this.appartment.nightPrice + 10 * (numberOfTraveller - 2);
         return newNightPrice;
       }
      else {

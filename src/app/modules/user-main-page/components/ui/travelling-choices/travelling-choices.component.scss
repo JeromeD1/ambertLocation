@@ -158,7 +158,25 @@ main {
                     filter: none;
                 }
             }
+
+            &.animated {
+                border-radius: 35%;
+                animation: clickMe 2.5s ease infinite;
+            }
         }
+
     }
 }
 
+
+@keyframes clickMe {
+    0%{
+        box-shadow: 0 0 1px 1px red;
+    }
+    50%{
+        box-shadow: 0 0 10px 10px red;
+    }
+    100%{
+        box-shadow: 0 0 1px 1px red;
+    }
+}

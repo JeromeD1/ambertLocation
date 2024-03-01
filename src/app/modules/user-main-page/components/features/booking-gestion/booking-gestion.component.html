@@ -1,6 +1,8 @@
 <main class="main-booking-gestion">
 
-    <app-travelling-choices [traveller]="traveller" (travellerChange)="updateTravellerData($event)" ></app-travelling-choices>
+    <section class="travellingChoices">
+        <app-travelling-choices [traveller]="traveller" (travellerChange)="updateTravellerData($event)" ></app-travelling-choices>
+    </section>
     
     <!-- <img *ngFor="let photo of allPhotos" [src]="photo.imgUrl" alt="photo"> -->
     
@@ -12,7 +14,7 @@
     
     <section class="section-show-appartments-cards">
         <div *ngFor="let appartment of filteredAppartments">
-            <app-appartment-card [appartment]="appartment" [traveller]="traveller" ></app-appartment-card>
+            <app-appartment-card [appartment]="appartment" [traveller]="traveller" [appartments]="appartments"></app-appartment-card>
         </div>
     </section>
 </main>

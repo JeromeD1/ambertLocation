@@ -17,6 +17,7 @@ import { AppartmentCardComponent } from './components/ui/appartment-card/appartm
 import { PlusDeDetailsComponent } from './components/ui/plus-de-details/plus-de-details.component';
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
 import { ToutesLesDispoComponent } from './components/ui/toutes-les-dispo/toutes-les-dispo.component';
+import { DemandeReservationComponent } from './components/ui/demande-reservation/demande-reservation.component';
 
 
 
@@ -31,6 +32,7 @@ import { ToutesLesDispoComponent } from './components/ui/toutes-les-dispo/toutes
     PlusDeDetailsComponent,
     SafeUrlPipe,
     ToutesLesDispoComponent,
+    DemandeReservationComponent,
   ],
   imports: [
     CommonModule,

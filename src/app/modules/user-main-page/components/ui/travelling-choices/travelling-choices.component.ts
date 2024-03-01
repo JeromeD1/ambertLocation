@@ -57,7 +57,8 @@ export class TravellingChoicesComponent {
   checkoutDate: new Date(),
   nbAdult: 0,
   nbChild: 0,
-  nbBaby: 0
+  nbBaby: 0,
+  message: ''
 }
 
 @Output()
@@ -69,6 +70,9 @@ travellerChange = new EventEmitter<Traveller>();
 
 imgBalai = '../../../../../../assets/icons/icons8-balayer-gris.png';
 showChooseVoyager: boolean = false;
+isResearchAnimated: boolean = false;
+initialNumberOfPayingTravellers: number = 0;
+
 travellerNumbers: TravellerNumbers = {
   numberAdult: this.traveller.nbAdult,
   numberChild: this.traveller.nbChild,
@@ -117,6 +121,10 @@ set checkinDateValue(date: Date) {
   } else {
     this._minCheckoutDate = null;
   }
+
+  if(this.checkoutDateValue && this.travellerNumbers.numberAdult > 0) {
+    this.isResearchAnimated = true;
+  }
 }
 
 set checkoutDateValue(date: Date) {
@@ -128,16 +136,19 @@ set checkoutDateValue(date: Date) {
     this._maxCheckinDate = null;
   }
 
-  console.log("checkoutDate Value", this._checkoutDateValue, "type", typeof(this._checkoutDateValue));
-  
+  if(this._checkinDateValue && this.travellerNumbers.numberAdult > 0) {
+    this.isResearchAnimated = true;
+  }
 }
 
 deleteCheckinDateValue() {
   this._checkinDateValue = null;
+  this.isResearchAnimated = false;
 }
 
 deleteCheckoutDateValue() {
   this._checkoutDateValue = null;
+  this.isResearchAnimated = false;
 }
 
 deleteTravellers() {
@@ -145,6 +156,7 @@ deleteTravellers() {
   this.travellerNumbers.numberBaby = 0;
   this.travellerNumbers.numberChild = 0;
   this.textTravellerNumber = "Combien ?";
+  this.isResearchAnimated = false;
 }
 
 
@@ -165,7 +177,7 @@ onStartResearch():void {
 
   
   this.travellerChange.emit(newTraveller);
-  
+  this.isResearchAnimated = false;
 }
 
 changeChooseVoyager():void {
@@ -175,11 +187,21 @@ changeChooseVoyager():void {
 
 updateTravellerNumbers(event: TravellerNumbers): void {
 this.travellerNumbers = event;
-console.log("new travellers",this.travellerNumbers);
 
 const numberOfPayingTravellers: number = this.travellerNumbers.numberAdult + this.travellerNumbers.numberChild;
 this.textTravellerNumber = numberOfPayingTravellers === 0 ? "Combien ?"
 : numberOfPayingTravellers === 1 ? "1 voyageur" : numberOfPayingTravellers + " voyageurs";
+
+  if(numberOfPayingTravellers !== this.initialNumberOfPayingTravellers) {
+  this.initialNumberOfPayingTravellers = numberOfPayingTravellers;
+  if(this.checkinDateValue && this.checkoutDateValue && this.travellerNumbers.numberAdult > 0){
+    this.isResearchAnimated = true;
+  } 
+}
+
+if(this.travellerNumbers.numberAdult === 0) {
+  this.isResearchAnimated = false;
+}
 
 }
 

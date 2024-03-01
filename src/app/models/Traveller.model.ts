@@ -1,4 +1,5 @@
 export interface Traveller {
+    id?: number;
     firstname: string;
     lastname: string;
     email: string;
@@ -12,4 +13,5 @@ export interface Traveller {
     nbAdult: number;
     nbChild: number;
     nbBaby: number;
+    message: string;
 }

@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Traveller } from '../../../../../models/Traveller.model';
 import { BookingDataService } from '../../../../../shared/booking-data.service';
 import { Photo } from '../../../../../models/Photo.model';
 import { AppartmentsService } from '../../../../../shared/appartments.service';
 import { Appartment } from '../../../../../models/Appartment.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-booking-gestion',
   templateUrl: './booking-gestion.component.html',
   styleUrl: './booking-gestion.component.scss'
 })
-export class BookingGestionComponent implements OnInit{
+export class BookingGestionComponent implements OnInit, OnDestroy{
 
   constructor(private bookingDataService: BookingDataService, private appartmentService: AppartmentsService) {}
 
   traveller!: Traveller;
   appartments: Appartment[] = [];
   filteredAppartments: Appartment[] = [];
+
+  appartmentServiceSubscription!: Subscription;
+  bookingDataServiceSubscription!:Subscription;
 
   ngOnInit(): void {
      this.getTravellerData(); 
@@ -26,7 +30,7 @@ export class BookingGestionComponent implements OnInit{
   }
 
   getTravellerData() :void {
-    this.bookingDataService.getTraveller().subscribe(traveller => this.traveller = traveller);
+    this.bookingDataServiceSubscription = this.bookingDataService.getTraveller().subscribe(traveller => this.traveller = traveller);
   }
 
   updateTravellerData(event: Traveller) :void {
@@ -67,13 +71,17 @@ export class BookingGestionComponent implements OnInit{
   }
 
   getAppartment():void {
-    this.appartmentService.getAppartments().subscribe(appartments => {
+    this.appartmentServiceSubscription = this.appartmentService.getAppartments().subscribe(appartments => {
       this.appartments = appartments;
       this.filteredAppartments = appartments;
     })
   }
 
 
+ngOnDestroy(): void {
+    this.appartmentServiceSubscription.unsubscribe();
+    this.bookingDataServiceSubscription.unsubscribe();
+}
 
   // showTraveller():void {
   //   console.log("traveller in booking-gestion",this.traveller);

@@ -20,7 +20,7 @@
                 <mat-datepicker-toggle matSuffix [for]="checkinDate"></mat-datepicker-toggle>
                 <mat-datepicker #checkinDate></mat-datepicker>
               </mat-form-field>
-              <img [src]="imgBalai" alt="effacer" *ngIf="checkinDateValue" (click)="deleteCheckinDateValue()" />
+              <img [src]="imgBalai" alt="effacer" *ngIf="checkinDateValue" (click)="deleteCheckinDateValue()" title="Effacer"/>
 
         </div>
        </div>
@@ -38,7 +38,7 @@
                 <mat-datepicker-toggle matSuffix [for]="checkoutDate"></mat-datepicker-toggle>
                 <mat-datepicker #checkoutDate></mat-datepicker>
               </mat-form-field>
-              <img [src]="imgBalai" alt="effacer" *ngIf="checkoutDateValue" (click)="deleteCheckoutDateValue()" />
+              <img [src]="imgBalai" alt="effacer" *ngIf="checkoutDateValue" (click)="deleteCheckoutDateValue()" title="Effacer"/>
         </div>
        </div>
 
@@ -46,7 +46,7 @@
             <h2>Voyageurs</h2>
             <div class="button-container">
                 <button type="button" (click)="changeChooseVoyager()" >{{textTravellerNumber}} </button>
-                <img [src]="imgBalai" alt="effacer" *ngIf="textTravellerNumber !== 'Combien ?'" (click)="deleteTravellers()" />
+                <img [src]="imgBalai" alt="effacer" *ngIf="textTravellerNumber !== 'Combien ?'" (click)="deleteTravellers()" title="Effacer"/>
             </div>
 
            <div class="voyagerNumber" *ngIf="showChooseVoyager" (mouseleave)="changeChooseVoyager()" >
@@ -60,6 +60,7 @@
 
         <section class="validation">
             <img  [class.disabled]="!checkinDateValue || !checkoutDateValue || travellerNumbers.numberAdult === 0"  
+            [class.animated]="isResearchAnimated"
             src="../../../../../../assets/icons/icons8-loupe.png" 
             alt="rechercher" 
             [title]="!checkinDateValue || !checkoutDateValue || travellerNumbers.numberAdult === 0 ? 'Veuillez remplir tous les champs pour lancer une recherche' : 'Rechercher les logements disponibles' "

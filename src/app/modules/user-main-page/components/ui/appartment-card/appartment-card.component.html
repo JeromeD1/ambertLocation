@@ -22,12 +22,17 @@
             <p>{{appartment.distanceCityCenter}} </p>
             <p>{{appartment.distanceTrain}} </p>
             <p>{{appartment.distanceTram}} </p>
-            <p>{{getNightPrice()}} €/nuit ({{(traveller.nbAdult > 0) ? (traveller.nbAdult + traveller.nbChild) + " pers." : "2 pers."}}) </p>
+            <!-- <p>{{getNightPrice()}} €/nuit ({{(traveller.nbAdult > 0) ? (traveller.nbAdult + traveller.nbChild) + " pers." : "2 pers."}}) </p> -->
+            <p>{{nightPrice}} €/nuit ({{(traveller.nbAdult > 0) ? (traveller.nbAdult + traveller.nbChild) + " pers." : "2 pers."}}) </p>
+
         </div>
 
         <div class="div-resa">
-            <p *ngIf="getTravelPrice()" class="infoPrixSejour">{{getTravelPrice()}}€ pour la durée du séjour ({{getNumberOfDays()}} nuits) </p>
-            <button type="button">Demande de réservation</button>
+            <!-- <p *ngIf="getTravelPrice()" class="infoPrixSejour">{{getTravelPrice()}}€ pour la durée du séjour ({{getNumberOfDays()}} nuits) </p> -->
+            <!-- <p *ngIf="travelPrice" class="infoPrixSejour">{{travelPrice}}€ pour la durée du séjour ({{getNumberOfDays()}} nuits) </p> -->
+            <p *ngIf="travelPrice" class="infoPrixSejour">{{travelPrice}}€ pour la durée du séjour ({{numberOfDays}} nuits) </p>
+
+            <button type="button" (click)="changeShowDemandeResa()" >Demande de réservation</button>
 
         </div>
     </section>
@@ -49,3 +54,13 @@
 [appartment]="appartment"
 (showToutesDispo)="changeShowToutesDispo()"
 ></app-toutes-les-dispo>
+
+<app-demande-reservation *ngIf="showDemandeResa"
+[traveller]="traveller"
+[travelPrice]="travelPrice"
+(showDemandeResa)="changeShowDemandeResa()"
+[appartments]="appartments"
+[appartment]="appartment"
+></app-demande-reservation>
+
+<!-- [travelPrice]="getTravelPrice()" -->

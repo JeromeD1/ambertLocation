@@ -70,7 +70,8 @@ export class BookingDataService {
       checkoutDate: null,
       nbAdult: 0,
       nbChild: 0,
-      nbBaby: 0
+      nbBaby: 0,
+      message: ''
     }
   )
 

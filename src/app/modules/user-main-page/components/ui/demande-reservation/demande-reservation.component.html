@@ -1,0 +1,30 @@
+<main class="main-plusDeDetails">
+
+    <section class="moreDetails-container">
+            <img src="../../../../../../assets/icons/icon-close-window.png" (click)="closeDemandeResa()"  alt="close" class="img-close"/>
+        
+    <form #demandeResaForm="ngForm" (ngSubmit)="demandeResaForm && onSubmit()">
+
+        <fieldset>
+            <h2>Rappel de votre demande</h2>
+            <div>
+                <label for="appatmentName">Logement</label>
+                <select id="appartmentName" name="appartmentName" >
+                    <option *ngFor="let logement of appartments" [selected]="logement.name === appartment.name" >{{logement.description}} </option>
+                </select>
+            </div>
+            <div>
+                <p>Date d'arrivée : {{arrivalDate}} </p>
+                <!-- <input id="checkin" #checkin="ngModel" name="checkin" type="date" [(ngModel)]="traveller.checkinDate"> -->
+                <p>Date de départ : {{departureDate}} </p>
+                <p>Nombre de nuits : {{numberNight ? numberNight : "---"}} </p>
+                <p>Coût de la réservation : {{travelPrice ? travelPrice + "€" : "---"}} </p>
+
+            </div>
+        </fieldset>
+    </form>
+    
+    </section>
+
+
+</main>
