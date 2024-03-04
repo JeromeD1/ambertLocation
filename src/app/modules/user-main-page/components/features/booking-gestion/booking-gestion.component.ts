@@ -5,6 +5,8 @@ import { Photo } from '../../../../../models/Photo.model';
 import { AppartmentsService } from '../../../../../shared/appartments.service';
 import { Appartment } from '../../../../../models/Appartment.model';
 import { Subscription } from 'rxjs';
+import { DiscountService } from '../../../../../shared/discount.service';
+import { Discount } from '../../../../../models/Discount.model';
 
 @Component({
   selector: 'app-booking-gestion',
@@ -13,24 +15,31 @@ import { Subscription } from 'rxjs';
 })
 export class BookingGestionComponent implements OnInit, OnDestroy{
 
-  constructor(private bookingDataService: BookingDataService, private appartmentService: AppartmentsService) {}
+  constructor(private bookingDataService: BookingDataService, private appartmentService: AppartmentsService, private discountService: DiscountService) {}
 
   traveller!: Traveller;
   appartments: Appartment[] = [];
   filteredAppartments: Appartment[] = [];
+  discount!: Discount;
 
   appartmentServiceSubscription!: Subscription;
   bookingDataServiceSubscription!:Subscription;
+  discountServiceSubscription!: Subscription;
 
   ngOnInit(): void {
      this.getTravellerData(); 
      this.getAppartment();
+     this.getDiscount();
     //  this.photoService.getAllAppartmentPhotos().subscribe((photos:Photo[]) => this.allPhotos = photos);
      
   }
 
   getTravellerData() :void {
     this.bookingDataServiceSubscription = this.bookingDataService.getTraveller().subscribe(traveller => this.traveller = traveller);
+  }
+
+  getDiscount(): void {
+    this.discountServiceSubscription = this.discountService.getDiscounts().subscribe(discount => this.discount = discount)
   }
 
   updateTravellerData(event: Traveller) :void {
@@ -81,6 +90,7 @@ export class BookingGestionComponent implements OnInit, OnDestroy{
 ngOnDestroy(): void {
     this.appartmentServiceSubscription.unsubscribe();
     this.bookingDataServiceSubscription.unsubscribe();
+    this.discountServiceSubscription.unsubscribe();
 }
 
   // showTraveller():void {

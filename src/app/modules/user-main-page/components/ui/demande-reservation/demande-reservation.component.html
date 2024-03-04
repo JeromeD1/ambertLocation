@@ -9,14 +9,30 @@
             <h2>Rappel de votre demande</h2>
             <div>
                 <label for="appatmentName">Logement</label>
-                <select id="appartmentName" name="appartmentName" >
-                    <option *ngFor="let logement of appartments" [selected]="logement.name === appartment.name" >{{logement.description}} </option>
+                <select id="appartmentName" name="appartmentName" #selectedAppartment (change)="handleChangeAppartment(selectedAppartment.value)" >
+                    <option *ngFor="let logement of appartments" [selected]="logement.name === appartment.name" [value]="logement.name" >{{logement.description}} </option>
                 </select>
             </div>
             <div>
                 <p>Date d'arrivée : {{arrivalDate}} </p>
+                <button type="button" (click)="changeShowPickerarrival()">Modifier</button>
+                <app-date-picker *ngIf="showPickerarrival"
+                [initDateValue]="traveller.checkinDate"
+                [importedCheckoutDate]="traveller.checkoutDate"
+                [importedReservations]="appartment.reservations"
+                [dateType]="'checkin'"
+                (dateEmitter)="handleChangeCheckinOrCheckout($event)"
+                ></app-date-picker>
                 <!-- <input id="checkin" #checkin="ngModel" name="checkin" type="date" [(ngModel)]="traveller.checkinDate"> -->
                 <p>Date de départ : {{departureDate}} </p>
+                <button type="button" (click)="changeShowPickerDeparture()">Modifier</button>
+                <app-date-picker *ngIf="showPickerDeparture"
+                [initDateValue]="traveller.checkoutDate"
+                [importedCheckinDate]="traveller.checkinDate"
+                [importedReservations]="appartment.reservations"
+                [dateType]="'checkout'"
+                (dateEmitter)="handleChangeCheckinOrCheckout($event)"
+                ></app-date-picker>
                 <p>Nombre de nuits : {{numberNight ? numberNight : "---"}} </p>
                 <p>Coût de la réservation : {{travelPrice ? travelPrice + "€" : "---"}} </p>
 

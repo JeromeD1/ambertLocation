@@ -2,6 +2,7 @@ import { Component, Input, ElementRef, ViewChild, HostListener, AfterViewInit } 
 import { Appartment } from '../../../../../models/Appartment.model';
 import { Traveller } from '../../../../../models/Traveller.model';
 import { SomeFunctionsService } from '../../../../../shared/some-functions.service';
+import { Discount } from '../../../../../models/Discount.model';
 
 @Component({
   selector: 'app-appartment-card',
@@ -20,6 +21,9 @@ export class AppartmentCardComponent implements AfterViewInit {
 
   @Input()
   traveller!: Traveller
+
+  @Input()
+  discount!: Discount;
 
   index: number = 0;
 

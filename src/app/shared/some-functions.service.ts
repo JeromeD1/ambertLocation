@@ -1,13 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Traveller } from "../models/Traveller.model";
 import { Appartment } from "../models/Appartment.model";
+import { Discount } from '../models/Discount.model';
+import { DiscountService } from './discount.service';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SomeFunctionsService {
+export class SomeFunctionsService implements OnDestroy{
 
-  constructor() { }
+  discount!: Discount;
+  discountSubscription!: Subscription;
+
+  constructor(private discountService: DiscountService) { 
+    this.discountSubscription = discountService.getDiscounts().subscribe(discount => this.discount= discount)
+  }
 
 
 
@@ -18,8 +26,14 @@ getTravelPrice = (user:Traveller, appart: Appartment): number | null => {
         user.nbAdult,
         user.nbChild, 
         user.checkinDate,
-        user.checkoutDate,
-        1);
+        user.checkoutDate, 
+        this.discount);
+      // return appart.calculateReservationPrice(
+      //   user.nbAdult,
+      //   user.nbChild, 
+      //   user.checkinDate,
+      //   user.checkoutDate,
+      //   1);
     } else {
       return null;
     }
@@ -43,6 +57,10 @@ getTravelPrice = (user:Traveller, appart: Appartment): number | null => {
     } else {
       return null;
     }
+  }
+
+  ngOnDestroy(): void {
+      this.discountSubscription.unsubscribe();
   }
 
 }

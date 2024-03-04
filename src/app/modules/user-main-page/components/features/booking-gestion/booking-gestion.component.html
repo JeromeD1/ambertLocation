@@ -14,7 +14,12 @@
     
     <section class="section-show-appartments-cards">
         <div *ngFor="let appartment of filteredAppartments">
-            <app-appartment-card [appartment]="appartment" [traveller]="traveller" [appartments]="appartments"></app-appartment-card>
+            <app-appartment-card 
+            [appartment]="appartment" 
+            [traveller]="traveller" 
+            [appartments]="appartments"
+            [discount]="discount"
+            ></app-appartment-card>
         </div>
     </section>
 </main>

@@ -18,6 +18,7 @@ import { PlusDeDetailsComponent } from './components/ui/plus-de-details/plus-de-
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
 import { ToutesLesDispoComponent } from './components/ui/toutes-les-dispo/toutes-les-dispo.component';
 import { DemandeReservationComponent } from './components/ui/demande-reservation/demande-reservation.component';
+import { DatePickerComponent } from './components/ui/date-picker/date-picker.component';
 
 
 
@@ -33,6 +34,7 @@ import { DemandeReservationComponent } from './components/ui/demande-reservation
     SafeUrlPipe,
     ToutesLesDispoComponent,
     DemandeReservationComponent,
+    DatePickerComponent,
   ],
   imports: [
     CommonModule,

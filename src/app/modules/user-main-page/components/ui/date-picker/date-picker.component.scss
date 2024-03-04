@@ -1,0 +1,12 @@
+@import '../../../../../../styles/variables';
+
+::ng-deep.highlight-date {
+    background-color: $colorBrand !important;
+    // border-radius: 25%;
+    box-sizing: border-box;
+    position: relative;
+
+    
+}
+
+

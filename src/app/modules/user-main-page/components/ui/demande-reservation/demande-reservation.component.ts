@@ -2,6 +2,8 @@ import { Component, Input,Output ,EventEmitter, OnInit } from '@angular/core';
 import { Traveller } from '../../../../../models/Traveller.model';
 import { Appartment } from '../../../../../models/Appartment.model';
 import { SomeFunctionsService } from '../../../../../shared/some-functions.service';
+import { DateFromPicker } from '../../../../../models/DateFromPicker.model';
+import { Discount } from '../../../../../models/Discount.model';
 
 @Component({
   selector: 'app-demande-reservation',
@@ -24,6 +26,9 @@ export class DemandeReservationComponent implements OnInit {
   @Input()
   travelPrice! : number | null;
 
+  @Input()
+  discount!: Discount;
+
   @Output()
   showDemandeResa = new EventEmitter<Boolean>();
 
@@ -32,6 +37,8 @@ export class DemandeReservationComponent implements OnInit {
 
   arrivalDate: string | undefined;
   departureDate: string | undefined;
+  showPickerarrival: boolean = false;
+  showPickerDeparture: boolean = false;
 
   get numberNight(): number | null {
     return this.someFunctionService.getNumberOfDays(this.traveller);
@@ -61,6 +68,46 @@ formatDate = (date: Date | null, arriveOuDepart: "arrive" | "depart"):string => 
   return arriveOuDepart === "arrive" ? "Choisissez une date d'arrivée" : "Choisissez une date de départ";
 }
 
+
+handleChangeAppartment(appartmentName : String): void {
+    this.appartment = this.appartments.find(appartment => appartment.name === appartmentName) as Appartment;
+    if(this.traveller.checkinDate && this.traveller.checkoutDate && this.traveller.nbAdult > 0){
+      // this.travelPrice = this.appartment.calculateReservationPrice(this.traveller.nbAdult, this.traveller.nbChild, this.traveller.checkinDate, this.traveller.checkoutDate,1)
+      this.travelPrice = this.appartment.calculateReservationPrice(this.traveller.nbAdult, this.traveller.nbChild, this.traveller.checkinDate, this.traveller.checkoutDate, this.discount)
+
+    }
+}
+
+
+changeShowPickerarrival():void {
+  this.showPickerarrival = !this.showPickerarrival;
+}
+
+changeShowPickerDeparture():void {
+  this.showPickerDeparture = !this.showPickerDeparture;
+}
+
+handleChangeCheckinOrCheckout(event: DateFromPicker): void {
+  
+  if(event.type === 'checkin') {
+    this.traveller.checkinDate = event.date;
+    this.arrivalDate = this.formatDate(this.traveller.checkinDate, "arrive");
+    this.changeShowPickerarrival();
+  } else if(event.type === 'checkout') {
+    this.traveller.checkoutDate = event.date;
+    this.departureDate = this.formatDate(this.traveller.checkoutDate, "depart");
+    this.changeShowPickerDeparture();
+  }
+
+  if(this.traveller.checkinDate && this.traveller.checkoutDate){
+    console.log("nbAdult",this.traveller.nbAdult);
+    
+    // this.travelPrice = this.appartment.calculateReservationPrice(this.traveller.nbAdult, this.traveller.nbChild, this.traveller.checkinDate, this.traveller.checkoutDate,1)
+    this.travelPrice = this.appartment.calculateReservationPrice(this.traveller.nbAdult, this.traveller.nbChild, this.traveller.checkinDate, this.traveller.checkoutDate, this.discount)
+
+  }
+
+}
 
   closeDemandeResa():void {
     this.showDemandeResa.emit(false);
