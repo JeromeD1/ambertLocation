@@ -51,31 +51,6 @@ export class Appartment {
     }
 
 
-
-    // calculateReservationPrice(nbAdult: number, nbChild:number, checkinDate: Date, checkoutDate: Date, discount: number) : number {
-    
-    //     const numberOfDays: number = (checkoutDate.getTime() - checkinDate.getTime()) / (1000 * 3600 * 24);        
-    //     const numberOfTravellers = nbAdult + nbChild;
-    //     let updateNightPrice = this.nightPrice;
-    //     let reservationPrice: number = 0;
-    //     let cleaningPrice: number = 0;
-    
-    //     if(numberOfTravellers > 2) {
-    //         updateNightPrice = this.nightPrice + 15 * (numberOfTravellers - 2);
-    //     }
-    
-    //     if(numberOfDays < 3) {
-    //         cleaningPrice = 30;
-    //     } else {
-    //         cleaningPrice = 50;
-    //     }
-
-    //     reservationPrice = updateNightPrice * numberOfDays * discount + cleaningPrice;
-    
-    //     return reservationPrice;
-    // }
-
-
     calculateReservationPrice(nbAdult: number, nbChild:number, checkinDate: Date, checkoutDate: Date, discount: Discount) : number {
     
         const numberOfDays: number = (checkoutDate.getTime() - checkinDate.getTime()) / (1000 * 3600 * 24);        
@@ -85,7 +60,7 @@ export class Appartment {
         let cleaningPrice: number = 0;
     
         if(numberOfTravellers > 2) {
-            updateNightPrice = this.nightPrice + 15 * (numberOfTravellers - 2);
+            updateNightPrice = this.nightPrice + 10 * (numberOfTravellers - 2);
         }
     
         if(numberOfDays < 3) {

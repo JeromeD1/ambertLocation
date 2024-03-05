@@ -13,14 +13,21 @@
 --gpFontSize:1.5rem;
 --mpFontSize:1.25rem;
 --ppFontSize: 1.1rem;
+--tppFontSize: 1rem;
 }
 
 body {
     background-color: $colorLightest;
 
 
-    p {
+
+    p, label, input, select {
         font-size: var(--ppFontSize);
+    }
+
+    span {
+        font-size: var(--tppFontSize);
+        color: rgb(150,0,0);
     }
 
     button {
@@ -53,6 +60,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             --gpFontSize:1.4rem;
             --mpFontSize:1.1rem;
             --ppFontSize: 1rem;
+            --tppFontSize: 0.9rem;
             }
 }
 
@@ -63,6 +71,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         --gpFontSize:1.3rem;
         --buttonFontSize:1rem;
         --ppFontSize: 0.9rem;
+        --tppFontSize: 0.85rem;
+
         }
 }
 
@@ -71,7 +81,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         --h1FontSize:1.9rem;
         --h2FontSize:1.4rem;
         --gpFontSize:1.2rem;
-        --buttonFontSize:0.8rem;
+        --buttonFontSize:0.9rem;
         --ppFontSize: 0.85rem;
+        --tppFontSize: 0.8rem;
+
         }
 }

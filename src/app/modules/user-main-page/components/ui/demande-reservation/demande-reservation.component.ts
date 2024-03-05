@@ -1,9 +1,10 @@
-import { Component, Input,Output ,EventEmitter, OnInit } from '@angular/core';
+import { Component, Input,Output ,EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { Traveller } from '../../../../../models/Traveller.model';
 import { Appartment } from '../../../../../models/Appartment.model';
 import { SomeFunctionsService } from '../../../../../shared/some-functions.service';
 import { DateFromPicker } from '../../../../../models/DateFromPicker.model';
 import { Discount } from '../../../../../models/Discount.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-demande-reservation',
@@ -34,6 +35,8 @@ export class DemandeReservationComponent implements OnInit {
 
   @Output()
   travellerEmitter = new EventEmitter<Traveller>();
+
+  @ViewChild('demandeResaForm', { static: false }) demandeResaForm!: NgForm;
 
   arrivalDate: string | undefined;
   departureDate: string | undefined;
@@ -80,7 +83,7 @@ handleChangeAppartment(appartmentName : String): void {
 
 
 changeShowPickerarrival():void {
-  this.showPickerarrival = !this.showPickerarrival;
+    this.showPickerarrival = !this.showPickerarrival;
 }
 
 changeShowPickerDeparture():void {
@@ -114,8 +117,22 @@ handleChangeCheckinOrCheckout(event: DateFromPicker): void {
   }
 
 
-  onSubmit():void {
+  onSubmit(event: Event):void {
+    console.log('submitted');
+    
+    const clickedButton = (event.target as Element).getAttribute('data-button-id');
+    
+    if(this.demandeResaForm.valid){
 
+      if(clickedButton === "button-modele"){
+  
+        console.log('button-modele');
+      } else if(clickedButton === 'button-envoiMail'){
+        console.log('button-envoiMail');
+        
+      }
+    }
+    
   }
 
 }
