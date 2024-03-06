@@ -1,118 +1,162 @@
-<main class="main-plusDeDetails">
+<main>
 
-    <section class="moreDetails-container">
+    
+
+    <section class="reservation-container">
             <img src="../../../../../../assets/icons/icon-close-window.png" (click)="closeDemandeResa()"  alt="close" class="img-close"/>
         
-    <!-- <form #demandeResaForm="ngForm" (ngSubmit)="demandeResaForm.valid && onSubmit($event)"> -->
+        <div class="contact">
+            <h1>Demande de réservation</h1>
+            <p>Pour effectuer une <span>demande de réservation</span>, vous pouvez, soit <span>contacter directement le propriétaire</span> via les coordonnées 
+                ci dessous, soit <span>effectuer une demande via le formulaire</span>.</p>
+            <p>Si vous <span>préférez</span> effectuer une demande directement <span>via votre email personnel</span>, vous pouvez 
+                vous aider en <span>complétant le formulaire ci dessous puis en cliquant sur "Modèle email"</span>. Aucune donnée personnelle ne sera alors conservée 
+                sur le site.</p>
+    
+        </div>
+
         <form #demandeResaForm="ngForm">
 
         <fieldset>
             <h2>Rappel de votre demande</h2>
-            <div>
-                <label for="appatmentName">Logement</label>
+            <div class="flex-input">
+                <label for="appatmentName">Logement :</label>
                 <select id="appartmentName" name="appartmentName" #selectedAppartment (change)="handleChangeAppartment(selectedAppartment.value)" >
                     <option *ngFor="let logement of appartments" [selected]="logement.name === appartment.name" [value]="logement.name" >{{logement.description}} </option>
                 </select>
             </div>
             <div>
-                <p>Date d'arrivée : {{arrivalDate}} </p>
-                <button type="button" (click)="changeShowPickerarrival()">Modifier</button>
-                <app-date-picker *ngIf="showPickerarrival"
-                [initDateValue]="traveller.checkinDate"
-                [importedCheckoutDate]="traveller.checkoutDate"
-                [importedReservations]="appartment.reservations"
-                [dateType]="'checkin'"
-                (dateEmitter)="handleChangeCheckinOrCheckout($event)"
-                ></app-date-picker>
-                <!-- <input id="checkin" #checkin="ngModel" name="checkin" type="date" [(ngModel)]="traveller.checkinDate"> -->
-                <p>Date de départ : {{departureDate}} </p>
-                <button type="button" (click)="changeShowPickerDeparture()">Modifier</button>
-                <app-date-picker *ngIf="showPickerDeparture"
-                [initDateValue]="traveller.checkoutDate"
-                [importedCheckinDate]="traveller.checkinDate"
-                [importedReservations]="appartment.reservations"
-                [dateType]="'checkout'"
-                (dateEmitter)="handleChangeCheckinOrCheckout($event)"
-                ></app-date-picker>
-                <p>Nombre de nuits : {{numberNight ? numberNight : "---"}} </p>
-                <div>
-                    <label for="nbAdult">Nombre d'adultes</label>
+                <div class="flex-input">
+                    <p>Date d'arrivée : {{!showPickerarrival ? arrivalDate : null}} </p>
+                    <button type="button" *ngIf="!showPickerarrival" (click)="changeShowPickerarrival()">Modifier</button>
+                    <app-date-picker *ngIf="showPickerarrival"
+                    [initDateValue]="traveller.checkinDate"
+                    [importedCheckoutDate]="traveller.checkoutDate"
+                    [importedReservations]="appartment.reservations"
+                    [dateType]="'checkin'"
+                    (dateEmitter)="handleChangeCheckinOrCheckout($event)"
+                    ></app-date-picker>
+                </div>
+
+                <div *ngIf="demandeResaForm.submitted && !traveller.checkinDate">
+                    <span>Veuillez sélectionner une date d'arrivée</span>
+                </div>
+
+                <div class="flex-input">
+                    <p>Date de départ : {{!showPickerDeparture ? departureDate : null}} </p>
+                    <button type="button" *ngIf="!showPickerDeparture" (click)="changeShowPickerDeparture()">Modifier</button>
+                    <app-date-picker *ngIf="showPickerDeparture"
+                    [initDateValue]="traveller.checkoutDate"
+                    [importedCheckinDate]="traveller.checkinDate"
+                    [importedReservations]="appartment.reservations"
+                    [dateType]="'checkout'"
+                    (dateEmitter)="handleChangeCheckinOrCheckout($event)"
+                    ></app-date-picker>
+                </div>
+
+                <div *ngIf="demandeResaForm.submitted && !traveller.checkoutDate">
+                    <span>Veuillez sélectionner une date de départ</span>
+                </div>
+
+                <p class="bold">Nombre de nuits : {{numberNight ? numberNight : "---"}} </p>
+
+                <div class="flex-input">
+                    <label for="nbAdult">Nombre d'adultes :</label>
                     <input type="number" [(ngModel)]="traveller.nbAdult" #nbAdult="ngModel" name="nbAdult" id="nbAdult" required min="1">
                 </div>
+
                 <div *ngIf="nbAdult.errors && demandeResaForm.submitted">
                     <span *ngIf="nbAdult.errors?.['required']" >1 adulte minimum</span>
                     <span *ngIf="nbAdult.errors?.['min']">1 adulte minimum</span>
                 </div>
-                <div>
-                    <label for="nbChild">Nombre d'enfants</label>
-                    <input type="number" [(ngModel)]="traveller.nbChild" #nbChild="ngModel" name="nbChild" id="nbChild">
-                </div>
-                <div>
-                    <label for="nbBaby">Nombre de bébés (- 2ans)</label>
-                    <input type="number" [(ngModel)]="traveller.nbBaby" #nbBaby="ngModel" name="nbBaby" id="nbBaby">
+
+                <div class="flex-input">
+                    <label for="nbChild">Nombre d'enfants :</label>
+                    <input type="number" [(ngModel)]="traveller.nbChild" #nbChild="ngModel" name="nbChild" id="nbChild" min="0">
                 </div>
 
-                <p>Coût de la réservation : {{travelPrice ? travelPrice + "€" : "---"}} </p>
+                <div class="flex-input">
+                    <label for="nbBaby">Nombre de bébés (- 2ans) :</label>
+                    <input type="number" [(ngModel)]="traveller.nbBaby" #nbBaby="ngModel" name="nbBaby" id="nbBaby" min="0">
+                </div>
+
+                <p class="bold">Coût de la réservation : {{travelPrice ? travelPrice + "€" : "---"}} </p>
 
             </div>
         </fieldset>
 
         <fieldset>
             <h2>Informations personnelles</h2>
-            <div>
-                <label for="firstname">Prénom</label>
+
+            <div class="flex-input">
+                <label for="firstname">Prénom :</label>
                 <input type="text" [(ngModel)]="traveller.firstname" #firstname="ngModel" name="firstname" id="firstname" placeholder="Saisissez votre prénom" required>
             </div>
+
             <div *ngIf="firstname.errors && demandeResaForm.submitted">
                 <span *ngIf="firstname.errors?.['required']" >Champ prénom obligatoire</span>
             </div>
-            <div>
-                <label for="lastname">Nom</label>
+
+            <div class="flex-input">
+                <label for="lastname">Nom :</label>
                 <input type="text" [(ngModel)]="traveller.lastname" #lastname="ngModel" name="lastname" id="lastname" placeholder="Saisissez votre nom" required>
             </div>
+
             <div *ngIf="lastname.errors && demandeResaForm.submitted">
                 <span *ngIf="lastname.errors?.['required']" >Champ nom obligatoire</span>
             </div>
-            <div>
-                <label for="address">Adresse</label>
+
+            <div class="flex-input">
+                <label for="address">Adresse :</label>
                 <input type="text" [(ngModel)]="traveller.address" #address="ngModel" name="address" id="address" placeholder="Numéro et rue" required>
             </div>
+
             <div *ngIf="address.errors && demandeResaForm.submitted">
                 <span *ngIf="address.errors?.['required']" >Veuillez saisir votre adresse</span>
             </div>
-            <div>
-                <label for="zipcode">Code postal</label>
+
+            <div class="flex-input">
+                <label for="zipcode">Code postal :</label>
                 <input type="text" [(ngModel)]="traveller.zipcode" #zipcode="ngModel" name="zipcode" id="zipcode" placeholder="Ex : 75010" required>
             </div>
+
             <div *ngIf="zipcode.errors && demandeResaForm.submitted">
                 <span *ngIf="zipcode.errors?.['required']" >Veuillez saisir votre code postal</span>
             </div>
-            <div>
-                <label for="city">Ville</label>
+
+            <div class="flex-input">
+                <label for="city">Ville :</label>
                 <input type="text" [(ngModel)]="traveller.city" #city="ngModel" name="city" id="city" placeholder="Ex : Paris" required>
             </div>
+
             <div *ngIf="city.errors && demandeResaForm.submitted">
                 <span *ngIf="city.errors?.['required']" >Veuillez saisir votre ville de résidence</span>
             </div>
-            <div>
-                <label for="country">Pays</label>
+
+            <div class="flex-input">
+                <label for="country">Pays :</label>
                 <input type="text" [(ngModel)]="traveller.country" #country="ngModel" name="country" id="country" placeholder="Pays de résidence" required>
             </div>
+
             <div *ngIf="country.errors && demandeResaForm.submitted">
                 <span *ngIf="country.errors?.['required']" >Veuillez saisir votre pays de résidence</span>
             </div>
-            <div>
-                <label for="email">Email</label>
+
+            <div class="flex-input">
+                <label for="email">Email :</label>
                 <input type="email" [(ngModel)]="traveller.email" #email="ngModel" name="email" id="email" placeholder="Ex : james.bond@gmail.com" required email>
             </div>
+
             <div *ngIf="email.errors && demandeResaForm.submitted">
                 <span *ngIf="email.errors?.['required']" >Champ email obligatoire</span>
                 <span *ngIf="email.errors?.['email']" >Veuillez saisir un email valide</span>
             </div>
-            <div>
-                <label for="phone">Téléphone</label>
+
+            <div class="flex-input">
+                <label for="phone">Téléphone :</label>
                 <input type="tel" [(ngModel)]="traveller.phone" #phone="ngModel" name="phone" id="phone" placeholder="(+33) 7 85 24 58 75" required>
             </div>
+
             <div *ngIf="phone.errors && demandeResaForm.submitted">
                 <span *ngIf="phone.errors?.['required']" >Champ numéro de téléphone obligatoire</span>
             </div>
@@ -122,9 +166,9 @@
             <textarea [(ngModel)]="traveller.message" #message="ngModel" name="message" placeholder="Envoyer un message personnalisé (facultatif)"></textarea>
         </fieldset>
 
-        <div>
-            <button type="submit" id="button-modele" data-button-id="button-modele" (click)="onSubmit($event)">Modèle email</button>
-            <button type="submit" id="button-envoiMail" data-button-id="button-envoiMail" (click)="onSubmit($event)">Envoyer la demande</button>
+        <div class="div-submit">
+            <button type="submit" id="button-modele" data-button-id="button-modele" (click)="onSubmit($event)" title="Que vous pouvez copier pour envoyer directement via votre mail perso">Modèle email</button>
+            <button type="submit" id="button-envoiMail" data-button-id="button-envoiMail" (click)="onSubmit($event)" title="Un email sera envoyé au propriétaire pour qu'il puisse traiter votre demande">Envoyer la demande</button>
         </div>
     </form>
     
