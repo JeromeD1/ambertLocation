@@ -1,10 +1,11 @@
-import { Component, Input,Output ,EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, Input,Output ,EventEmitter, OnInit, ViewChild, inject } from '@angular/core';
 import { Traveller } from '../../../../../models/Traveller.model';
 import { Appartment } from '../../../../../models/Appartment.model';
 import { SomeFunctionsService } from '../../../../../shared/some-functions.service';
 import { DateFromPicker } from '../../../../../models/DateFromPicker.model';
 import { Discount } from '../../../../../models/Discount.model';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demande-reservation',
@@ -12,6 +13,8 @@ import { NgForm } from '@angular/forms';
   styleUrl: './demande-reservation.component.scss'
 })
 export class DemandeReservationComponent implements OnInit {
+
+  router: Router = inject(Router);
 
   constructor(private someFunctionService: SomeFunctionsService) {}
 
@@ -49,27 +52,11 @@ export class DemandeReservationComponent implements OnInit {
 
 
 ngOnInit(): void {
-    console.log("traveller", this.traveller);
-    this.arrivalDate = this.formatDate(this.traveller.checkinDate, "arrive");
-    this.departureDate = this.formatDate(this.traveller.checkoutDate, "depart");
+    this.arrivalDate = this.someFunctionService.formatDate(this.traveller.checkinDate, "arrive");
+    this.departureDate = this.someFunctionService.formatDate(this.traveller.checkoutDate, "depart");
 }
 
-formatDate = (date: Date | null, arriveOuDepart: "arrive" | "depart"):string => {
-  if(date){
-    let day: string = date.getDate().toString();  // Jour du mois
-    let month: string = (date.getMonth() + 1).toString();  // Les mois sont indexés à partir de 0 en JavaScript
-    let year: string = date.getFullYear().toString();
-    console.log("month",month, "length", month.length);
-    
-    // Ajoute un zéro devant le jour et le mois si nécessaire
-    if(day.length < 1) day = '0' + day;
-    if(month.length < 2) month = '0' + month;
-    
-    return day + '/' + month + '/' + year;
-  }
 
-  return arriveOuDepart === "arrive" ? "Choisissez une date d'arrivée" : "Choisissez une date de départ";
-}
 
 
 handleChangeAppartment(appartmentName : String): void {
@@ -94,11 +81,11 @@ handleChangeCheckinOrCheckout(event: DateFromPicker): void {
   
   if(event.type === 'checkin') {
     this.traveller.checkinDate = event.date;
-    this.arrivalDate = this.formatDate(this.traveller.checkinDate, "arrive");
+    this.arrivalDate = this.someFunctionService.formatDate(this.traveller.checkinDate, "arrive");
     this.changeShowPickerarrival();
   } else if(event.type === 'checkout') {
     this.traveller.checkoutDate = event.date;
-    this.departureDate = this.formatDate(this.traveller.checkoutDate, "depart");
+    this.departureDate = this.someFunctionService.formatDate(this.traveller.checkoutDate, "depart");
     this.changeShowPickerDeparture();
   }
 
@@ -125,8 +112,8 @@ handleChangeCheckinOrCheckout(event: DateFromPicker): void {
     if(this.demandeResaForm.valid){
 
       if(clickedButton === "button-modele"){
-  
-        console.log('button-modele');
+        this.router.navigate(['/modeleEmail', this.appartment.id])
+        
       } else if(clickedButton === 'button-envoiMail'){
         console.log('button-envoiMail');
         

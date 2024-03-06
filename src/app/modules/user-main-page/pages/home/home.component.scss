@@ -27,7 +27,7 @@ main {
             max-width: 1800px;
             top: 0;
             width: 100%;
-            z-index: 1;
+            z-index: 0;
             overflow: hidden;
             
         }
@@ -36,7 +36,7 @@ main {
             position: absolute;
             bottom: 0;
             width: 100%;
-            z-index: 2;
+            z-index: 1;
 
             &::after {
                 position: absolute;

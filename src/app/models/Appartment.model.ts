@@ -53,7 +53,7 @@ export class Appartment {
 
     calculateReservationPrice(nbAdult: number, nbChild:number, checkinDate: Date, checkoutDate: Date, discount: Discount) : number {
     
-        const numberOfDays: number = (checkoutDate.getTime() - checkinDate.getTime()) / (1000 * 3600 * 24);        
+        const numberOfDays: number = Math.round((checkoutDate.getTime() - checkinDate.getTime()) / (1000 * 3600 * 24));        
         const numberOfTravellers = nbAdult + nbChild;
         let updateNightPrice = this.nightPrice;
         let reservationPrice: number = 0;

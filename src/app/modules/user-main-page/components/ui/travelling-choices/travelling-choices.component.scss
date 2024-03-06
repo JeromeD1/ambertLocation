@@ -17,13 +17,14 @@ main {
     .titre {
         display: flex;
         align-items: center;
-        width: 15%;
+        width: 10%;
         height: 80px;
         border-right: 3px solid $colorDark;
 
         h1 {
             margin: 0;
             font-size: var(--gpFontSize);
+
         }
 
       
@@ -130,7 +131,7 @@ main {
     }
 
     .validation {
-        width: 5%;
+        width: 10%;
         height: 75px;
         border-left: 3px solid $colorDark;
         display: flex;
@@ -178,5 +179,39 @@ main {
     }
     100%{
         box-shadow: 0 0 1px 1px red;
+    }
+}
+
+
+@media screen and (max-width:1000px) {
+    main {
+
+        padding: 16px;
+
+    
+        .titre {
+            width: 10%;
+        }
+    
+    
+        .data {
+            width: 74%;
+        }
+    
+        .validation {
+            width: 10%;
+    
+        }
+    }
+}
+
+@media screen and (max-width:800px) {
+    main {
+
+
+        .data {
+            width: 78%;
+        }
+
     }
 }

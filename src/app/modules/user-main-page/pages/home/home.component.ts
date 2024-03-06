@@ -1,23 +1,25 @@
 
-import { Component, OnInit, Renderer2, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { BookingDataService } from '../../../../shared/booking-data.service';
 import { Traveller } from '../../../../models/Traveller.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
 constructor(private renderer: Renderer2, private el: ElementRef, private bookingDataService: BookingDataService) {}
 
 traveller!: Traveller;
+bookingDataServiceSubscription!: Subscription;
 
 ngOnInit(): void {
     this.scrollEffect();
     this.updateImageHeight();
-    this.bookingDataService.getTraveller().subscribe(traveller => this.traveller = traveller);
+    this.bookingDataServiceSubscription = this.bookingDataService.getTraveller().subscribe(traveller => this.traveller = traveller);
 }
 
 //on écoute l'évênement de changement de taille de la fenêtre pour toujours mettre à jour la hauteur de l'image
@@ -68,6 +70,9 @@ updateImageHeight() :void {
   this.renderer.setStyle(openImageSection,'height', imageHeight + 'px')
 }
 
+ngOnDestroy(): void {
+    this.bookingDataServiceSubscription.unsubscribe();
+}
 
 }
 
