@@ -6,6 +6,9 @@ import { DateFromPicker } from '../../../../../models/DateFromPicker.model';
 import { Discount } from '../../../../../models/Discount.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Reservations } from '../../../../../models/Reservations.model';
+import { TravellerHasReservation } from '../../../../../models/travellerHasReservation.model';
+import { BookingDataService } from '../../../../../shared/booking-data.service';
 
 @Component({
   selector: 'app-demande-reservation',
@@ -16,7 +19,7 @@ export class DemandeReservationComponent implements OnInit {
 
   router: Router = inject(Router);
 
-  constructor(private someFunctionService: SomeFunctionsService) {}
+  constructor(private someFunctionService: SomeFunctionsService, private bookingDataService: BookingDataService) {}
 
   @Input()
   traveller!: Traveller;
@@ -45,6 +48,18 @@ export class DemandeReservationComponent implements OnInit {
   departureDate: string | undefined;
   showPickerarrival: boolean = false;
   showPickerDeparture: boolean = false;
+  showPopup: boolean = false;
+  reservation: Reservations = {
+    id:0,
+    appartment_id: 0,
+    checkinDate: new Date(),
+    checkoutDate: new Date(),
+    nbAdult:0,
+    nbChild:0,
+    nbBaby:0,
+    reservationPrice:0
+  };
+  travellerHasReservation!: TravellerHasReservation;
 
   get numberNight(): number | null {
     return this.someFunctionService.getNumberOfDays(this.traveller);
@@ -109,14 +124,36 @@ handleChangeCheckinOrCheckout(event: DateFromPicker): void {
     
     const clickedButton = (event.target as Element).getAttribute('data-button-id');
     
-    if(this.demandeResaForm.valid){
+    if(this.demandeResaForm.valid && this.traveller.checkinDate && this.traveller.checkoutDate && this.travelPrice){
 
       if(clickedButton === "button-modele"){
         this.router.navigate(['/modeleEmail', this.appartment.id])
         
       } else if(clickedButton === 'button-envoiMail'){
-        console.log('button-envoiMail');
+        this.reservation = {
+          id:0,
+          appartment_id: this.appartment.id,
+          checkinDate: this.traveller.checkinDate,
+          checkoutDate: this.traveller.checkoutDate,
+          nbAdult:this.traveller.nbAdult,
+          nbChild: this.traveller.nbChild,
+          nbBaby: this.traveller.nbBaby,
+          reservationPrice: this.travelPrice
+        }
+
+
+        this.travellerHasReservation = {
+          traveller: this.traveller,
+          reservation: this.reservation,
+          appartmentDescription: this.appartment.description,
+          numberNight: this.numberNight as number,
+          accepted: false
+        };
+
         
+        this.bookingDataService.postTravellerReservation(this.travellerHasReservation);
+        
+        this.showPopup = true;
       }
     }
     

@@ -2,60 +2,17 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Traveller } from '../models/Traveller.model';
+import { TravellerHasReservation } from '../models/travellerHasReservation.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingDataService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  // private _checkinDate: BehaviorSubject<Date> = new BehaviorSubject(new Date());
-  // private _checkoutDate: BehaviorSubject<Date> = new BehaviorSubject(new Date());
-  // private _nbAdult: BehaviorSubject<number> = new BehaviorSubject(0);
-  // private _nbChild: BehaviorSubject<number> = new BehaviorSubject(0);
-  // private _nbBaby: BehaviorSubject<number> = new BehaviorSubject(0);
-
-  // setCheckinDate(checkinDate: Date) :void {
-  //   this._checkinDate.next(checkinDate);
-  // }
-
-  // setCheckoutDate(checkoutDate: Date) :void {
-  //   this._checkoutDate.next(checkoutDate);
-  // }
-
-  // setNbAdult(nbAdult: number) :void {
-  //   this._nbAdult.next(nbAdult);
-  // }
-
-  // setNbChild(nbChild: number) :void {
-  //   this._nbChild.next(nbChild);
-  // }
-
-  // setNbBaby(nbBaby: number) :void {
-  //   this._nbBaby.next(nbBaby);
-  // }
-  
-
-  // getCheckinDate() : Observable<Date> {
-  //   return this._checkinDate.asObservable();
-  // }
-
-  // getCheckoutDate() : Observable<Date> {
-  //   return this._checkoutDate.asObservable();
-  // }
-
-  // getNbAdult() : Observable<number> {
-  //   return this._nbAdult.asObservable();
-  // }
-
-  // getNbChild() : Observable<number> {
-  //   return this._nbChild.asObservable();
-  // }
-
-  // getNbBaby() : Observable<number> {
-  //   return this._nbBaby.asObservable();
-  // }
 
   private _traveller: BehaviorSubject<Traveller> = new BehaviorSubject<Traveller>(
     {firstname: '',
@@ -81,6 +38,27 @@ export class BookingDataService {
 
   setTraveller(traveller: Traveller) :void {
     this._traveller.next(traveller);
+  }
+
+  postTravellerReservation(travellerHasReservation: TravellerHasReservation): void {
+    console.log('in posttravelreservation', travellerHasReservation);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    
+    this.http.post(environment.BACKEND_BASE_URL + '/reservationWithTraveller',travellerHasReservation, httpOptions).subscribe(
+      (response) => {
+        console.log('Reponse du serveur : ', response);
+        
+      },
+      (error) => {
+        console.error('Erreur lors de la requete : ', error);
+        
+      }
+    )
   }
 
 }

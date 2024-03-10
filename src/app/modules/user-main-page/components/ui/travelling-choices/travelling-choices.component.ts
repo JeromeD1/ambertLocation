@@ -144,11 +144,21 @@ set checkoutDateValue(date: Date) {
 deleteCheckinDateValue() {
   this._checkinDateValue = null;
   this.isResearchAnimated = false;
+
+  const newTraveller: Traveller = {...this.traveller, 
+    checkinDate: this.checkinDateValue,
+  };
+  this.travellerChange.emit(newTraveller);
 }
 
 deleteCheckoutDateValue() {
   this._checkoutDateValue = null;
   this.isResearchAnimated = false;
+
+  const newTraveller: Traveller = {...this.traveller, 
+    checkoutDate: this.checkoutDateValue,
+  };
+  this.travellerChange.emit(newTraveller);
 }
 
 deleteTravellers() {

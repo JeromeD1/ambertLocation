@@ -15,6 +15,28 @@ main {
     // justify-content: center;
     // align-items: center;
 
+    .popupDemandeTransmise{
+        margin: auto;
+        width: 700px;
+        max-width: 95vw;
+        height: 50vh;
+        margin-top: 25vh;
+        background-color: #fafafa9e;
+        backdrop-filter: blur(40px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10%;
+        border-radius: 24px;
+        border: 1px solid $colorDark;
+
+        h2, p {
+            text-align: center;
+        }
+
+    }
+
     .reservation-container {
         margin: auto;
         margin-top: 24px;
@@ -32,7 +54,7 @@ main {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 64px;
+        gap: 32px;
         padding: 16px 64px;
         border-radius: 24px;
         
@@ -61,6 +83,7 @@ main {
 
                 h1 {
                     text-align: center;
+                    margin: 16px;
                 }
 
                 p{
@@ -72,11 +95,27 @@ main {
                         font-weight: $ppFontSize;
                     }
                 }
+
+                .ourCoordinates {
+                    margin: auto;
+                    margin-top: 24px;
+                    border: 1px solid $colorDark;
+                    border-radius: 24px;
+                    padding: 16px;
+                    background-color: $colorLight;
+                    width: 500px;
+                    max-width: 95vw;
+                    
+                    h2, p{
+                        text-align: center;
+                    }
+                }
             }
         
             form {
                 width: 800px;
                 max-width: 100%;
+                margin: 0;
 
                 fieldset {
                     &:first-child{

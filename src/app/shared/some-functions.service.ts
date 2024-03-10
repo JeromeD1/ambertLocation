@@ -76,6 +76,9 @@ getTravelPrice = (user:Traveller, appart: Appartment): number | null => {
     return arriveOuDepart === "arrive" ? "Choisissez une date d'arrivée" : "Choisissez une date de départ";
   }
 
+
+ 
+
   ngOnDestroy(): void {
       this.discountSubscription.unsubscribe();
   }

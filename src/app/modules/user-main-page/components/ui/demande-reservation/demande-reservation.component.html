@@ -2,7 +2,7 @@
 
     
 
-    <section class="reservation-container">
+    <section class="reservation-container" *ngIf="!showPopup">
             <img src="../../../../../../assets/icons/icon-close-window.png" (click)="closeDemandeResa()"  alt="close" class="img-close"/>
         
         <div class="contact">
@@ -12,6 +12,13 @@
             <p>Si vous <span>préférez</span> effectuer une demande directement <span>via votre email personnel</span>, vous pouvez 
                 vous aider en <span>complétant le formulaire ci dessous puis en cliquant sur "Modèle email"</span>. Aucune donnée personnelle ne sera alors conservée 
                 sur le site.</p>
+
+                <div class="ourCoordinates">
+                    <h2>Contact</h2>
+                    <p><strong>Téléphone :</strong>06 26 66 54 20</p>
+                    <p><strong>Email :</strong>tiannguyen&#64;hotmail.fr</p>
+
+                </div>
     
         </div>
 
@@ -174,5 +181,11 @@
     
     </section>
 
+    <section class="popupDemandeTransmise" *ngIf="showPopup">
+        <h2>Votre demande de réservation a bien été transmise</h2>
+        <p>Vous serez contactés bientôt contacté par mail ou par téléphone par le propriétaire.</p>
+
+        <button type="button" (click)="closeDemandeResa()">Revenir à l'accueil</button>
+    </section>
 
 </main>

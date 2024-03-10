@@ -59,6 +59,7 @@ main {
                 width: 100%;
                 max-width: 250px;
                 // border: 1px solid red;
+               
 
                 img {
                     position: absolute;
@@ -118,6 +119,7 @@ main {
 
                 &:hover {
                     background-color: rgb(236, 236, 236);
+                    cursor: pointer;
                 }
             }
            
