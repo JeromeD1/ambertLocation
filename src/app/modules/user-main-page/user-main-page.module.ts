@@ -20,6 +20,7 @@ import { ToutesLesDispoComponent } from './components/ui/toutes-les-dispo/toutes
 import { DemandeReservationComponent } from './components/ui/demande-reservation/demande-reservation.component';
 import { DatePickerComponent } from './components/ui/date-picker/date-picker.component';
 import { ModeleEmailComponent } from './pages/modele-email/modele-email.component';
+import { TravellingChoiceSmallScreenComponent } from './components/ui/travelling-choice-small-screen/travelling-choice-small-screen.component';
 
 
 
@@ -37,6 +38,7 @@ import { ModeleEmailComponent } from './pages/modele-email/modele-email.componen
     DemandeReservationComponent,
     DatePickerComponent,
     ModeleEmailComponent,
+    TravellingChoiceSmallScreenComponent,
   ],
   imports: [
     CommonModule,

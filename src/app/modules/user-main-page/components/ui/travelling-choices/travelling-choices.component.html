@@ -1,4 +1,4 @@
-<main>
+<main class="bigscreen">
     <section class="titre">
         <h1>Votre séjour</h1>
     </section>
@@ -68,4 +68,25 @@
         </section>
     
 </main>
+
+
+
+<main class="smallScreen" (click)="setShowTravellingChoiceSmallScreen()">
+    <img   
+    src="../../../../../../assets/icons/icons8-loupe.png" 
+    alt="rechercher" 
+    > 
+    <div>
+        <h2>Rechercher</h2>
+        <p>Choix des dates et des voyageurs</p>
+    </div>
+</main>
+
+
+<app-travelling-choice-small-screen
+*ngIf="showTravellingChoiceSmallScreen"
+(showComponentEmitter)="setShowTravellingChoiceSmallScreen()"
+(travellerChangeEmitter)="onReceiveTravellerChangeFromSmallScreenTravellerChoice($event)"
+[traveller]="traveller"
+></app-travelling-choice-small-screen>
 

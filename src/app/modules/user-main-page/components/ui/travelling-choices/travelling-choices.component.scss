@@ -172,6 +172,12 @@ main {
 }
 
 
+.smallScreen {
+    display: none;
+}
+
+
+
 @keyframes clickMe {
     0%{
         box-shadow: 0 0 1px 1px red;
@@ -215,5 +221,70 @@ main {
             width: 78%;
         }
 
+    }
+}
+
+
+@media screen and (max-width:700px) {
+
+    .bigscreen {
+        display: none;
+    }
+
+    .smallScreen{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 24px;
+        box-sizing: border-box;
+        // border: 8px solid $colorMid;
+        box-shadow: 0px 0px 6px 8px $colorMid;
+        background-color: $colorLightest;
+        padding: 8px;
+        height: auto;
+    
+        &:hover {
+            background-color: $colorLight;
+            box-shadow: 0px 0px 6px 8px $colorDark;
+    
+            cursor: pointer;
+    
+            img {
+                filter: sepia();
+            }
+    
+            div {
+    
+                p {
+                    color: $colorDark;
+                }
+            }
+      
+        }
+    
+        img {
+            width: 40px;
+            height: auto;
+            border-radius: 50%;
+        }
+    
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 4px;
+            margin: 0;
+    
+            h2, p {
+                margin: 0;
+                padding: 0;
+            }
+    
+            p {
+                color: $colorDarkest;
+            }
+        }
     }
 }

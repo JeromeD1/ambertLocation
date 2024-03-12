@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Traveller } from '../../../../../models/Traveller.model';
 import { TravellerNumbers } from '../../../models/TravellerNumbers.model';
 
@@ -80,6 +80,11 @@ travellerNumbers: TravellerNumbers = {
 }
 textTravellerNumber: string = "Combien ?";
 
+showTravellingChoiceSmallScreen: boolean = false;
+
+
+
+
 private _checkinDateValue: Date | null = null;
 private _checkoutDateValue: Date | null = null;
 private _minCheckinDate: Date = new Date();
@@ -141,7 +146,7 @@ set checkoutDateValue(date: Date) {
   }
 }
 
-deleteCheckinDateValue() {
+deleteCheckinDateValue():void {
   this._checkinDateValue = null;
   this.isResearchAnimated = false;
 
@@ -151,7 +156,7 @@ deleteCheckinDateValue() {
   this.travellerChange.emit(newTraveller);
 }
 
-deleteCheckoutDateValue() {
+deleteCheckoutDateValue():void {
   this._checkoutDateValue = null;
   this.isResearchAnimated = false;
 
@@ -161,7 +166,7 @@ deleteCheckoutDateValue() {
   this.travellerChange.emit(newTraveller);
 }
 
-deleteTravellers() {
+deleteTravellers():void {
   this.travellerNumbers.numberAdult = 0;
   this.travellerNumbers.numberBaby = 0;
   this.travellerNumbers.numberChild = 0;
@@ -169,7 +174,9 @@ deleteTravellers() {
   this.isResearchAnimated = false;
 }
 
-
+setShowTravellingChoiceSmallScreen():void {
+  this.showTravellingChoiceSmallScreen = ! this.showTravellingChoiceSmallScreen;
+}
 
 onStartResearch():void {
 
@@ -215,6 +222,10 @@ if(this.travellerNumbers.numberAdult === 0) {
 
 }
 
+
+onReceiveTravellerChangeFromSmallScreenTravellerChoice(event: Traveller) {
+  this.travellerChange.emit(event);
+}
 
 
 // showCheckinInput: boolean = false;
