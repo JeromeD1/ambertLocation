@@ -7,4 +7,5 @@ export interface Reservations {
     nbChild: number;
     nbBaby: number;
     reservationPrice: number;
+    accepted: boolean
 }

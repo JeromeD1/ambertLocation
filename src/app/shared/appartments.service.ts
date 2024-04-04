@@ -89,6 +89,43 @@ export class AppartmentsService {
         appartment.nightPrice,
         appartment.caution,
         appartment.googleMapUrl,
+        appartment.active,
+        appartment.type,
+        appartment.infos,
+        appartment.photos,
+        reservations
+      )}
+      )
+    )
+    )
+
+  }
+
+  getActiveAppartments():Observable<Appartment[]> {
+    return this.http.get<Appartment[]>(environment.BACKEND_BASE_URL + '/activeAppartments').pipe(
+      map((appartments) => appartments.map(appartment => {
+        
+        //conversion de checkinDate et checkoutDate de reservations qui arrivent en string en Date
+        const reservations = appartment.reservations.map(resa =>(
+          {...resa, checkinDate: new Date(resa.checkinDate), checkoutDate: new Date(resa.checkoutDate)}
+        ));
+
+        
+        return new Appartment(
+        appartment.id,
+        appartment.name,
+        appartment.description,
+        appartment.address,
+        appartment.zipcode,
+        appartment.city,
+        appartment.distanceCityCenter,
+        appartment.distanceTrain,
+        appartment.distanceTram,
+        appartment.nightPrice,
+        appartment.caution,
+        appartment.googleMapUrl,
+        appartment.active,
+        appartment.type,
         appartment.infos,
         appartment.photos,
         reservations

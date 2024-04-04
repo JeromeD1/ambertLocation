@@ -25,6 +25,9 @@ export class DatePickerComponent implements OnInit {
   @Input()
   dateType!: 'checkin' | 'checkout';
 
+  @Input()
+  whoIsWatching: "user" | "admin" = "user"
+
   @Output()
   dateEmitter = new EventEmitter<DateFromPicker>();
 
@@ -161,7 +164,15 @@ dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
 
     for(let reservation of this.importedReservations) {
         if(time >= reservation.checkinDate.getTime() && time < reservation.checkoutDate.getTime()){
-            return 'highlight-date';
+            if(this.whoIsWatching === "user"){
+              return 'highlight-date-accepted';
+            }else {
+              if(reservation.accepted){
+                return 'highlight-date-accepted';
+              } else {
+                return 'highlight-date-not-accepted';
+              }
+            }
         }
     }
 }

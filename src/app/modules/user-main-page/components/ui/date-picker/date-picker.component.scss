@@ -1,12 +1,17 @@
 @import '../../../../../../styles/variables';
 
-::ng-deep.highlight-date {
+::ng-deep.highlight-date-accepted {
     background-color: $colorBrand !important;
     // border-radius: 25%;
     box-sizing: border-box;
     position: relative;
+}
 
-    
+::ng-deep.highlight-date-not-accepted {
+    background-color: yellow !important;
+    // border-radius: 25%;
+    box-sizing: border-box;
+    position: relative;
 }
 
 

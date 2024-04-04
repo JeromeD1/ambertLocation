@@ -80,9 +80,11 @@ export class BookingGestionComponent implements OnInit, OnDestroy{
   }
 
   getAppartment():void {
-    this.appartmentServiceSubscription = this.appartmentService.getAppartments().subscribe(appartments => {
+    this.appartmentServiceSubscription = this.appartmentService.getActiveAppartments().subscribe(appartments => {
       this.appartments = appartments;
       this.filteredAppartments = appartments;
+      console.log("appartments",appartments);
+      
     })
   }
 

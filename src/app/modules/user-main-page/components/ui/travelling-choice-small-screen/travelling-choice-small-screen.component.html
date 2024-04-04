@@ -1,7 +1,7 @@
 <main>
     <img src="../../../../../../assets/icons/icon-close-window.png" (click)="close()"  alt="close" class="img-close"/>
 
-    <div>
+    <div class="reduce">
         <h2>Date d'arrivée</h2>
         <mat-form-field >
             <input matInput [matDatepicker]="checkinDate" 
@@ -17,7 +17,7 @@
 
     </div>
 
-    <div>
+    <div class="reduce">
         <h2>Date de départ</h2>
         <mat-form-field >
             <input matInput [matDatepicker]="checkoutDate" 
@@ -32,12 +32,12 @@
 
     </div>
 
-    <div>
+    <div class="reduce">
         <h2>Voyageurs</h2>
         <app-choose-voyagers [travellerNumbers]="travellerNumbers" (travellerUpdate)="updateTravellerNumbers($event)" ></app-choose-voyagers>
     </div>
 
-    <div class="buttons">
+    <div class="buttons reduce">
         <button type="button" (click)="close()">Annuler</button>
         <button type="button" (click)="onStartResearch()">Rechercher</button>
     </div>

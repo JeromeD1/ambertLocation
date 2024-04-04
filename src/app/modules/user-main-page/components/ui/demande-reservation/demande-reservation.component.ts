@@ -57,7 +57,8 @@ export class DemandeReservationComponent implements OnInit {
     nbAdult:0,
     nbChild:0,
     nbBaby:0,
-    reservationPrice:0
+    reservationPrice:0,
+    accepted: false
   };
   travellerHasReservation!: TravellerHasReservation;
 
@@ -138,7 +139,8 @@ handleChangeCheckinOrCheckout(event: DateFromPicker): void {
           nbAdult:this.traveller.nbAdult,
           nbChild: this.traveller.nbChild,
           nbBaby: this.traveller.nbBaby,
-          reservationPrice: this.travelPrice
+          reservationPrice: this.travelPrice,
+          accepted: false
         }
 
 

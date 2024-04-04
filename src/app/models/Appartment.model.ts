@@ -44,6 +44,8 @@ export class Appartment {
         public nightPrice: number,
         public caution: number,
         public googleMapUrl: string,
+        public active: boolean,
+        public type: string,
         public infos: Info[],
         public photos: Photo[],
         public reservations: Reservations[],
