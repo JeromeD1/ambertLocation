@@ -21,6 +21,7 @@ import { DemandeReservationComponent } from './components/ui/demande-reservation
 import { DatePickerComponent } from './components/ui/date-picker/date-picker.component';
 import { ModeleEmailComponent } from './pages/modele-email/modele-email.component';
 import { TravellingChoiceSmallScreenComponent } from './components/ui/travelling-choice-small-screen/travelling-choice-small-screen.component';
+import { LoginComponent } from './components/features/login/login.component';
 
 
 
@@ -39,6 +40,7 @@ import { TravellingChoiceSmallScreenComponent } from './components/ui/travelling
     DatePickerComponent,
     ModeleEmailComponent,
     TravellingChoiceSmallScreenComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,

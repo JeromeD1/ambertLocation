@@ -15,6 +15,9 @@ constructor(private renderer: Renderer2, private el: ElementRef, private booking
 
 traveller!: Traveller;
 bookingDataServiceSubscription!: Subscription;
+showLogin: boolean = false
+clickCount: number = 0
+timerId: any = null
 
 ngOnInit(): void {
     this.scrollEffect();
@@ -68,6 +71,24 @@ updateImageHeight() :void {
   const imageHeight = landingPageImage.offsetHeight;
   const openImageSection = this.el.nativeElement.querySelector('.openImage');
   this.renderer.setStyle(openImageSection,'height', imageHeight + 'px')
+}
+
+closeLogin(): void {
+  this.showLogin = false
+}
+
+onClickSeveralTimes() {
+  this.clickCount++;
+  if (this.clickCount === 1) {
+    this.timerId = setTimeout(() => {
+      this.clickCount = 0; // Réinitialiser le compteur après 5 secondes
+    }, 5000);
+  }
+  if (this.clickCount >= 5) {
+    this.showLogin = true
+    this.clickCount = 0; // Réinitialiser le compteur
+    clearTimeout(this.timerId); // Annuler le setTimeout
+  }
 }
 
 ngOnDestroy(): void {

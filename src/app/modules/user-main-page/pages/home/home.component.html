@@ -11,7 +11,7 @@
 </main> -->
 
 <main>
-    <section class="openImage">
+    <section class="openImage" (click)="onClickSeveralTimes()">
         <div id="landingPage">
             <img src="../../../../../assets/global-pictures/landingPagePicture2.png" alt="locations à Orléans">
         </div>
@@ -31,7 +31,10 @@
         <app-booking-gestion></app-booking-gestion>
     </section>
 
-
+    <app-login
+    *ngIf="showLogin"
+    (closeEmitter)="closeLogin()"
+    ></app-login>
     
 </main>
 
