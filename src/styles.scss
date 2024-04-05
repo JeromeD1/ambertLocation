@@ -21,8 +21,9 @@ body {
 
 
 
-    p, label, input, select, textarea {
+    p, label, input, select, textarea, a {
         font-size: var(--ppFontSize);
+        text-decoration: none;
     }
 
     span {

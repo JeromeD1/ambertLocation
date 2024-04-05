@@ -1,0 +1,27 @@
+<nav>
+    <div class="navPage">
+        <a [routerLink]="['/admin/acceptResa']" ><p>Demandes de réservation</p></a>
+        <a [routerLink]="['/admin/addResa']" ><p>Enregistrement de réservations</p></a>
+        <a [routerLink]="['/admin/appartGestion']" ><p>Gestion globale</p></a>
+    </div>
+
+    <img src="../../../../../assets/icons/icons-menu.png" 
+    alt="menu-burger" 
+    *ngIf="!showMenuBurger" 
+    (click)="setShowMenuBurger()" 
+    class="navBurger"
+    >
+
+
+    <div class="navBurger" *ngIf="showMenuBurger">
+        <a [routerLink]="['/admin/acceptResa']" (click)="setShowMenuBurger()"><p>Demandes de réservation</p></a>
+        <a [routerLink]="['/admin/addResa']" (click)="setShowMenuBurger()"><p>Enregistrement de réservations</p></a>
+        <a [routerLink]="['/admin/appartGestion']" (click)="setShowMenuBurger()"><p>Gestion globale</p></a>
+    </div>
+
+    <img src="../../../../../assets/icons/icon-calendrier.png" 
+    alt="open-calendar"
+    [class.keepOnRight]="showMenuBurger"
+    >
+
+</nav>

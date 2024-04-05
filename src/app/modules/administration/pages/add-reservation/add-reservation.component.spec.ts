@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserMainPageComponent } from './user-main-page.component';
+import { AddReservationComponent } from './add-reservation.component';
 
-describe('UserMainPageComponent', () => {
-  let component: UserMainPageComponent;
-  let fixture: ComponentFixture<UserMainPageComponent>;
+describe('AddReservationComponent', () => {
+  let component: AddReservationComponent;
+  let fixture: ComponentFixture<AddReservationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserMainPageComponent]
+      declarations: [AddReservationComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(UserMainPageComponent);
+    fixture = TestBed.createComponent(AddReservationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

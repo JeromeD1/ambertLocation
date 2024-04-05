@@ -1,17 +1,25 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { LoginService } from '../../../../../shared/login.service';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
+
+  constructor(private loginService: LoginService, private router: Router) {}
+
+  destroy$: Subject<void> = new Subject()
 
   @Output()
   closeEmitter: EventEmitter<void> = new EventEmitter()
 
   login: string = ""
   password: string = ""
+  wrongUserMessage!: string
 
   closeLogin(): void {
     this.closeEmitter.emit()
@@ -23,7 +31,18 @@ export class LoginComponent {
       password: this.password
     }
 
+    this.loginService.login(formData).subscribe(data => {
+      if(data?.role === "admin"){
+        this.router.navigate(['/admin'])
+      } else {
+        this.wrongUserMessage = "Vous n'avez pas les droits pour vous connecter !"
+      }
+    })
 
-    this.closeLogin()
+  }
+
+  ngOnDestroy(): void {
+      this.destroy$.next()
+      this.destroy$.complete()
   }
 }

@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserMainPageModule } from './modules/user-main-page/user-main-page.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AdministrationModule } from './modules/administration/administration.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     BrowserModule,
     AppRoutingModule,
     UserMainPageModule,
+    AdministrationModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
