@@ -91,6 +91,11 @@ export class AppartmentsService {
         appartment.googleMapUrl,
         appartment.active,
         appartment.type,
+        appartment.proprietaires_id,
+        appartment.nomProprietaire,
+        appartment.menage_court_sejour,
+        appartment.menage_long_sejour,
+        appartment.menage_longue_duree,
         appartment.infos,
         appartment.photos,
         reservations
@@ -126,6 +131,11 @@ export class AppartmentsService {
         appartment.googleMapUrl,
         appartment.active,
         appartment.type,
+        appartment.proprietaires_id,
+        appartment.nomProprietaire,
+        appartment.menage_court_sejour,
+        appartment.menage_long_sejour,
+        appartment.menage_longue_duree,
         appartment.infos,
         appartment.photos,
         reservations

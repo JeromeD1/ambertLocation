@@ -37,11 +37,22 @@ nav {
     
             &:hover {
                 background-color: $colorLight;
+                border-radius: 35px;
             }
     
             p{
                 margin: 0 !important;
                 padding: 0;
+            }
+        }
+
+        a.leaveAdmin {
+            color: rgb(200, 0, 0);
+
+            &:hover {
+                background-color: $colorDarkest;
+                font-weight: bold;
+                color: $colorLight;
             }
         }
     }
@@ -104,6 +115,16 @@ nav {
 
                 &:hover {
                     background-color: $colorLight;
+                }
+            }
+
+            a.leaveAdmin {
+                color: rgb(200, 0, 0);
+    
+                &:hover {
+                    background-color: $colorDarkest;
+                    font-weight: bold;
+                    color: $colorLight;
                 }
             }
         }

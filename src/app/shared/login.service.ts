@@ -26,4 +26,13 @@ export class LoginService {
       })
       )
   }
+
+  logout():Observable<any> {
+    return this.http.get(environment.BACKEND_BASE_URL + '/logout').pipe(
+      tap((res) => {
+        console.log("logged out", "res", res);
+        
+      })
+      )
+  }
 }

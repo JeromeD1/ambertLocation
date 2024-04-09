@@ -3,6 +3,7 @@
         <a [routerLink]="['/admin/acceptResa']" ><p>Demandes de réservation</p></a>
         <a [routerLink]="['/admin/addResa']" ><p>Enregistrement de réservations</p></a>
         <a [routerLink]="['/admin/appartGestion']" ><p>Gestion globale</p></a>
+        <a class="leaveAdmin" (click)="logout()"><p>Quitter le mode admin</p></a>
     </div>
 
     <img src="../../../../../assets/icons/icons-menu.png" 
@@ -17,6 +18,7 @@
         <a [routerLink]="['/admin/acceptResa']" (click)="setShowMenuBurger()"><p>Demandes de réservation</p></a>
         <a [routerLink]="['/admin/addResa']" (click)="setShowMenuBurger()"><p>Enregistrement de réservations</p></a>
         <a [routerLink]="['/admin/appartGestion']" (click)="setShowMenuBurger()"><p>Gestion globale</p></a>
+        <a [routerLink]="['/']" class="leaveAdmin" (click)="logout()"><p>Quitter le mode admin</p></a>
     </div>
 
     <img src="../../../../../assets/icons/icon-calendrier.png" 

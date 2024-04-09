@@ -46,6 +46,11 @@ export class Appartment {
         public googleMapUrl: string,
         public active: boolean,
         public type: string,
+        public proprietaires_id: number,
+        public nomProprietaire: string,
+        public menage_court_sejour: number,
+        public menage_long_sejour: number,
+        public menage_longue_duree: number,
         public infos: Info[],
         public photos: Photo[],
         public reservations: Reservations[],
@@ -66,9 +71,11 @@ export class Appartment {
         }
     
         if(numberOfDays < 3) {
-            cleaningPrice = 30;
+            cleaningPrice = this.menage_court_sejour;
+        } else if(numberOfDays < 190) {
+            cleaningPrice = this.menage_long_sejour;
         } else {
-            cleaningPrice = 50;
+            cleaningPrice = this.menage_longue_duree;
         }
 
         if(numberOfDays >= 7 && numberOfDays < 30){
